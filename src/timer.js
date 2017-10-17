@@ -84,13 +84,19 @@ export default class Timer {
   /**
    * 构造函数
    * @param {object} options - 计时器配置参数
-   * @param {number|string} options.timeStamp - 计时时间戳，毫秒旱位，且必须毫秒数为1000单位，不能是1111这样，超出时会向下取整
+   * @param {number|string} options.timeStamp - 计时时间戳，毫秒旱位，且必须毫秒数为1000单位，不能是1234这样，超出时会自动向下取整
+   * @param {boolean} [options.debug] - 是否开启日志调试模式，默认关闭
    * @param {string} [options.format='HH:mm'] - 日期时间格式
-   * @param {string} [options.type='decrease'] - 支持两种计时方式：increase（递增）,decrease(默认，递减，倒计时)
+   * @param {boolean} [options.isIncrease=false] - 是否为正计时模式，false表示倒计时
    */
   constructor(options) {
-    this.$status = 'init'
+    this.$status = 'prepare'
     this.$options = Object.assign({}, Timer.options, options)
+
+    if (!this.$options.timeStamp) {
+      logger.error('require timeStamp option param, please check!')
+    }
+
     // 当前时间戳
     this.$timeStamp = Math.floor(Number(this.$options.timeStamp) / 1000) * 1000
     // 当前倒计时过去的时间戳
@@ -100,7 +106,7 @@ export default class Timer {
 
     // 当前倒计时间字符串
     // 如果是倒计时，则将当前的时间设置为最大值
-    if (this.$options.type === 'increase') {
+    if (this.$options.isIncrease) {
       this.$datetime = formatDate(0, this.$options.format)
     } else {
       this.$datetime = formatDate(this.$timeStamp - this.$timeZone, this.$options.format)
@@ -113,9 +119,10 @@ export default class Timer {
    * @enum
    */
   static options = {
-    timeStamp: 0,
+    debug: false, // 是否开启调试模式
+    timeStamp: undefined,
     format: 'mm:ss',
-    type: 'countdown'
+    isIncrease: false
   }
 
   /**
@@ -162,7 +169,7 @@ export default class Timer {
         logger.log('throughTimeStamp', this.$throughTimeStamp)
 
         if (this.$currentTimeStamp > (this.$startTimeStamp + this.$throughTimeStamp)) {
-          logger.log('超过时间流速')
+          logger.log('超过时间流速，自动修正!')
           // 超过的时间流速
           const lostTime = this.$currentTimeStamp - this.$startTimeStamp
           this.$timeStamp = this.$options.timeStamp - lostTime - 1000
@@ -179,7 +186,7 @@ export default class Timer {
           this.$throughTimeStamp = this.$endTimeStamp - this.$startTimeStamp
         }
 
-        if (this.$options.type === 'increase') {
+        if (this.$options.isIncrease) {
           /* eslint-disable max-len*/
           this.$datetime = formatDate(this.$options.timeStamp - this.$timeStamp - this.$timeZone, this.$options.format)
         } else {
@@ -209,7 +216,10 @@ export default class Timer {
   stop() {
     clearTimeout(this.$timeouter)
     this.$status = 'stop'
+
+    // 记录秒表
     this.$stopwatch.push(this.$datetime)
+
     return Promise.resolve(this)
   }
 
@@ -218,15 +228,18 @@ export default class Timer {
    * @returns {Promise} 返回Promise对象
    */
   reset() {
-    this.$status = 'init'
     clearTimeout(this.$timeouter)
+    this.$status = 'prepare'
+
     this.$timeStamp = this.$options.timeStamp
     this.$startTimeStamp = Math.floor(Date.now() / 1000) * 1000
-    if (this.$options.type === 'increase') {
+
+    if (this.$options.isIncrease) {
       this.$datetime = formatDate(1, this.$options.format)
     } else {
       this.$datetime = formatDate(this.$timeStamp - this.$timeZone, this.$options.format)
     }
+
     return Promise.resolve(this)
   }
 }
