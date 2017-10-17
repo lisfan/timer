@@ -61,8 +61,6 @@
 import formatDate from './format-date'
 import Logger from '@~lisfan/logger'
 
-const logger = new Logger('timer')
-
 /**
  * 计时器类
  * @class Timer
@@ -80,6 +78,7 @@ export default class Timer {
   $endTimeStamp = undefined // 计时器开始计时起=>计时器完成时的一轮周期计时时间戳
   $currentTimeStamp = undefined // 当前时间空间维度中正常流逝的时间戳，用于板正流逝的时间
   $stopwatch = [] // 计时器暂停的码表功能
+  _logger = undefined // 日志打印器，方便调试
 
   /**
    * 构造函数
@@ -93,8 +92,13 @@ export default class Timer {
     this.$status = 'prepare'
     this.$options = Object.assign({}, Timer.options, options)
 
+    this._logger = new Logger({
+      name: 'timer',
+      debug: this.$options.debug
+    })
+
     if (!this.$options.timeStamp) {
-      logger.error('require timeStamp option param, please check!')
+      this._logger.error('require timeStamp option param, please check!')
     }
 
     // 当前时间戳
@@ -164,12 +168,12 @@ export default class Timer {
         // 倒计时也可能在一些途中超时挂起，导致倒计时没有再走下去，所以每次需要重新捕获
         this.$currentTimeStamp = Math.floor(Date.now() / 1000) * 1000
 
-        logger.log('currentTimeStamp', new Date(this.$currentTimeStamp).toLocaleString())
-        logger.log('startTimeStamp', new Date(this.$startTimeStamp).toLocaleString())
-        logger.log('throughTimeStamp', this.$throughTimeStamp / 1000 + 's')
+        this._logger.log('currentTimeStamp', new Date(this.$currentTimeStamp).toLocaleString())
+        this._logger.log('startTimeStamp', new Date(this.$startTimeStamp).toLocaleString())
+        this._logger.log('throughTimeStamp', this.$throughTimeStamp / 1000 + 's')
 
         if (this.$currentTimeStamp > (this.$startTimeStamp + this.$throughTimeStamp)) {
-          logger.log('超过时间流速，自动修正!')
+          this._logger.log('超过时间流速，自动修正!')
           // 超过的时间流速
           const lostTime = this.$currentTimeStamp - this.$startTimeStamp
           this.$remainTimeStamp = this.$options.timeStamp - lostTime - 1000
@@ -189,6 +193,9 @@ export default class Timer {
           /* eslint-disable max-len*/
           this.$datetime = formatDate(this.$options.timeStamp - this.$remainTimeStamp - this.$timeZone, this.$options.format)
         } else {
+          const a = this.$remainTimeStamp + this.$timeZone
+          console.log('1111', a)
+          console.log('222', formatDate(a, this.$options.format))
           this.$datetime = formatDate(this.$remainTimeStamp - this.$timeZone, this.$options.format)
         }
         /* eslint-enable max-len*/
