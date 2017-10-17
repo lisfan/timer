@@ -74,7 +74,7 @@ export default class Timer {
   $datetime = undefined  // 计时器文本
   $timeouter = undefined // 计时器延迟ID
   $timeZone = undefined // 用户所在时区
-  $timeStamp = undefined // 计时器剩余计时时间戳
+  $remainTimeStamp = undefined // 计时器剩余计时时间戳
   $throughTimeStamp = undefined // 计时器已经过的时间戳
   $startTimeStamp = undefined // 计时器开始计时时间戳
   $endTimeStamp = undefined // 计时器开始计时起=>计时器完成时的一轮周期计时时间戳
@@ -98,7 +98,7 @@ export default class Timer {
     }
 
     // 当前时间戳
-    this.$timeStamp = Math.floor(Number(this.$options.timeStamp) / 1000) * 1000
+    this.$remainTimeStamp = Math.floor(Number(this.$options.timeStamp) / 1000) * 1000
     // 当前倒计时过去的时间戳
     this.$throughTimeStamp = 0
     // 当前地区的偏移时区
@@ -109,7 +109,7 @@ export default class Timer {
     if (this.$options.isIncrease) {
       this.$datetime = formatDate(0, this.$options.format)
     } else {
-      this.$datetime = formatDate(this.$timeStamp - this.$timeZone, this.$options.format)
+      this.$datetime = formatDate(this.$remainTimeStamp - this.$timeZone, this.$options.format)
     }
   }
 
@@ -147,7 +147,7 @@ export default class Timer {
       // 计时器开始走的这一刻记录当前时间戳
       this.$startTimeStamp = Math.floor(Date.now() / 1000) * 1000
       // 标记倒计时结束的时间戳
-      this.$endTimeStamp = this.$startTimeStamp + this.$timeStamp
+      this.$endTimeStamp = this.$startTimeStamp + this.$remainTimeStamp
 
       const dingdong = () => {
         // 优先执行回调
@@ -164,39 +164,40 @@ export default class Timer {
         // 倒计时也可能在一些途中超时挂起，导致倒计时没有再走下去，所以每次需要重新捕获
         this.$currentTimeStamp = Math.floor(Date.now() / 1000) * 1000
 
-        logger.log('currentTimeStamp', this.$currentTimeStamp)
-        logger.log('startTimeStamp', this.$startTimeStamp)
-        logger.log('throughTimeStamp', this.$throughTimeStamp)
+        logger.log('currentTimeStamp', new Date(this.$currentTimeStamp).toLocaleString())
+        logger.log('startTimeStamp', new Date(this.$startTimeStamp).toLocaleString())
+        logger.log('throughTimeStamp', this.$throughTimeStamp / 1000 + 's')
 
         if (this.$currentTimeStamp > (this.$startTimeStamp + this.$throughTimeStamp)) {
           logger.log('超过时间流速，自动修正!')
           // 超过的时间流速
           const lostTime = this.$currentTimeStamp - this.$startTimeStamp
-          this.$timeStamp = this.$options.timeStamp - lostTime - 1000
+          this.$remainTimeStamp = this.$options.timeStamp - lostTime - 1000
           this.$throughTimeStamp = lostTime + 1000
         } else {
-          logger.log('正常流速')
-          this.$timeStamp -= 1000
+          this.$remainTimeStamp -= 1000
           this.$throughTimeStamp += 1000
         }
 
         // 时间已达到最大值，
-        if (this.$timeStamp < 0) {
-          this.$timeStamp = 0
+        if (this.$remainTimeStamp < 0) {
+          this.$remainTimeStamp = 0
           this.$throughTimeStamp = this.$endTimeStamp - this.$startTimeStamp
         }
 
         if (this.$options.isIncrease) {
           /* eslint-disable max-len*/
-          this.$datetime = formatDate(this.$options.timeStamp - this.$timeStamp - this.$timeZone, this.$options.format)
+          this.$datetime = formatDate(this.$options.timeStamp - this.$remainTimeStamp - this.$timeZone, this.$options.format)
         } else {
-          this.$datetime = formatDate(this.$timeStamp - this.$timeZone, this.$options.format)
+          this.$datetime = formatDate(this.$remainTimeStamp - this.$timeZone, this.$options.format)
         }
         /* eslint-enable max-len*/
 
-        if (this.$currentTimeStamp >= this.$endTimeStamp - 1000) {
+        if (this.$timeouter && this.$currentTimeStamp >= this.$endTimeStamp - 1000) {
           clearTimeout(this.$timeouter)
-          this.$status = 'finish'
+          this.$timeouter = undefined
+
+          this.$status = 'finished'
           resolve(this)
         } else {
           this.$timeouter = setTimeout(() => {
@@ -215,7 +216,8 @@ export default class Timer {
    */
   stop() {
     clearTimeout(this.$timeouter)
-    this.$status = 'stop'
+    this.$timeouter = undefined
+    this.$status = 'stoped'
 
     // 记录秒表
     this.$stopwatch.push(this.$datetime)
@@ -229,15 +231,17 @@ export default class Timer {
    */
   reset() {
     clearTimeout(this.$timeouter)
+    this.$timeouter = undefined
+
     this.$status = 'prepare'
 
-    this.$timeStamp = this.$options.timeStamp
+    this.$remainTimeStamp = this.$options.timeStamp
     this.$startTimeStamp = Math.floor(Date.now() / 1000) * 1000
 
     if (this.$options.isIncrease) {
       this.$datetime = formatDate(1, this.$options.format)
     } else {
-      this.$datetime = formatDate(this.$timeStamp - this.$timeZone, this.$options.format)
+      this.$datetime = formatDate(this.$remainTimeStamp - this.$timeZone, this.$options.format)
     }
 
     return Promise.resolve(this)
