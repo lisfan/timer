@@ -1,60 +1,6 @@
 /**
  * 计时器
  *
- * 模块性质：工具模块
- * 作用范围：pc、mobile
- * 依赖模块：utils/format-date，utils/logger
- * 来源项目：扫码点单H5
- * 初始发布日期：2017-05-24 20:00
- * 最后更新日期：2017-05-25 20:00
- *
- * ## 特性
- * - 可检测到时间流速不正常时（如休眠），会自动调整理回正确的时间
- * - 计时器每秒都会可执行一个回调（但不包括最后执行完成时的一个回调，需要通过resolve触发），执行不同的业务逻辑
- * - 返回Promise对象用于操作计时器结束时的回调
- * - 支持递增计时和倒计时（默认）
- * - 时间戳接收值单位为毫秒数，且是1000/单位的整，超出时会向下取整
- * - 会自动抵减时区（比如除了的毫秒数是0，北京时间即08:00:00，会抵减8小时，成00:00:00）
- * - 提供类似妙表保存每次触发stop()的时间戳的功能
- * - 暂不支持毫秒计时
- *
- * ## Changelog
- * ### 2017.05.29
- * - [feature] 增加递增计时功能
- * - [fix] 修复计时器开始时，回调延迟一秒触发的bug
- *
- * ### 2017.05.28
- * - 某些情况下创建的vue实例未绑定$route属性时的路由名称取值
- *
- * ## Usage
- * ``` js
- * import Timer from 'utils/timer'
- *
- * // 实例化
- * const timer = new Timer({
- *    timeStamp:10*1000
- * })
- *
- * // 倒计时开始
- * timer.start((timerInstance) => {
- *     global.log('每秒执行一次该回调',timerInstance.$datetime)
- * }).then(() => {
- *     global.log('倒计时结束')
- * }).catch(() => {
- *     global.log('中途造成计时中断')
- * })
- *
- * // 倒计时暂停
- * timer.stop().then((timerInstance) => {
- *     global.log('倒计时已暂停')
- * })
- *
- * // 倒计时重置
- * timer.reset().then((timerInstance) => {
- *     global.log('倒计时已重置')
- * })
- * ```
- * @since 3.0.0
  * @version 1.1.0
  */
 
@@ -82,9 +28,9 @@ const MODE_TYPE = {
  */
 const _actions = {
   /**
-   * 四舍五入时间戳，调整指定时间的时间戳
+   * 向下取整时间戳，调整指定时间的时间戳
    * @param {number} [timeStamp=Date.now()] - 时间戳
-   * @returns {number} - 返回四舍五入后的时间戳
+   * @returns {number} - 返回向下取整后的时间戳
    */
   timeStamp(timeStamp = Date.now()) {
     return Math.floor(timeStamp / 1000) * 1000
