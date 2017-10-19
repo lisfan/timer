@@ -1,10 +1,10 @@
 {
   "name": "@~lisfan/timer",
-  "version": "1.1.0-rc.3",
+  "version": "1.1.0-rc.4",
   "description": "计时器",
   "main": "src/index.js",
   "scripts": {
-    "pub-pre": "git pull && npm version prerelease && git add . && git commit -m 'updata: update version' && git push && npm version publish",
+    "pub-pre": "git pull && npm version prerelease && git add . && git commit -m 'updata: update version' && git push && npm version prerelease",
     "pub-n": "npm run pub-pre && npm publish --tag n",
     "pub-a": "npm run pub-pre && npm publish --tag a",
     "pub-b": "npm run pub-pre && npm publish --tag b",
