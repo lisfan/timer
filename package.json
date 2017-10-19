@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/lisfan/timer#readme",
   "dependencies": {
-    "@~lisfan/logger": "^1.1.0-rc.0",
-    "@~lisfan/validation": "^1.0.0-rc.0"
+    "@~lisfan/logger": "^1.1.0-rc.3",
+    "@~lisfan/validation": "^1.0.0-rc.1"
   }
 }
