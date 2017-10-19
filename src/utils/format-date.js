@@ -34,7 +34,7 @@ export default class FormatDate {
     }
 
     // 值必须有
-    this.$fields = FormatDate.getFields(this.$date, this.$format)
+    this.$data = FormatDate.getFields(this.$date, this.$format)
   }
 
   static options = {
@@ -85,23 +85,23 @@ export default class FormatDate {
    * 获取日期时间格式化后的字符串
    */
   static toString(dateOrFields, format) {
-    let $fields
+    let data
     if (validation.isPlainObject(dateOrFields)) {
-      $fields = dateOrFields
+      data = dateOrFields
     } else {
-      $fields = FormatDate.getFields(dateOrFields, format)
+      data = FormatDate.getFields(dateOrFields, format)
     }
 
     Object.entries(DATETIME_PATTERN).forEach(([pattern, dateStr]) => {
       const regexp = new RegExp((pattern + '+'))
-      format = format.replace(regexp, $fields[dateStr])
+      format = format.replace(regexp, data[dateStr])
     })
 
     return format
   }
 
   $options = undefined
-  $fields = undefined
+  $data = undefined
 
   get $date() {
     return this.$options.date
@@ -120,7 +120,7 @@ export default class FormatDate {
   }
 
   toString() {
-    return FormatDate.toString(this.$fields, this.$format)
+    return FormatDate.toString(this.$data, this.$format)
   }
 }
 

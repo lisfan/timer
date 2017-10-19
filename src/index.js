@@ -231,8 +231,8 @@ export default class Timer {
    *
    * @returns {string} - 返回倒计时各具体的日期时间数据
    */
-  get $fields() {
-    return this._formatDate.$fields
+  get $data() {
+    return this._formatDate.$data
   }
 
   /**
@@ -240,7 +240,7 @@ export default class Timer {
    *
    * @readonly
    */
-  set $fields(value) {
+  set $data(value) {
   }
 
   /**
