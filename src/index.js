@@ -63,6 +63,32 @@ const _actions = {
  */
 export default class Timer {
   /**
+   * 配置参数
+   * @static
+   * @enum
+   */
+  static options = {
+    // timeStamp: undefined, // 必须
+    debug: false, // 是否开启调试模式
+    format: 'mm:ss', // 格式化匹配模式
+    mode: '-', // 计时模式，代表倒计时的可选值请参考MODE_TYPE
+  }
+
+  /**
+   * 更改默认配置参数
+   * @static
+   * @param {object} [options] - 配置对象
+   */
+  static config(options) {
+    const ctor = this
+
+    ctor.options = {
+      ...ctor.options,
+      ...options
+    }
+  }
+  
+  /**
    * 构造函数
    * @param {object} options - 计时器配置参数
    * @param {number} options.timeStamp - 计时时间戳，毫秒旱位，且必须毫秒数为1000单位，不能是1234这样，超出时会自动向下取整
@@ -97,32 +123,6 @@ export default class Timer {
     // 当前倒计时间字符串
     // 如果是倒计时，则将当前的时间设置为最大值
     this._formatDate = _actions.formatDate(this)
-  }
-
-  /**
-   * 配置参数
-   * @static
-   * @enum
-   */
-  static options = {
-    // timeStamp: undefined, // 必须
-    debug: false, // 是否开启调试模式
-    format: 'mm:ss', // 格式化匹配模式
-    mode: '-', // 计时模式，代表倒计时的可选值请参考MODE_TYPE
-  }
-
-  /**
-   * 更改默认配置参数
-   * @static
-   * @param {object} [options] - 配置对象
-   */
-  static config(options) {
-    const ctor = this
-
-    ctor.options = {
-      ...ctor.options,
-      ...options
-    }
   }
 
   // 实例配置参数，取默认值
