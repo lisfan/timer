@@ -87,7 +87,7 @@ export default class Timer {
       ...options
     }
   }
-  
+
   /**
    * 构造函数
    * @param {object} options - 计时器配置参数
