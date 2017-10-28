@@ -9,7 +9,22 @@ import validation from '@~lisfan/validation'
 import Logger from '@~lisfan/logger'
 import FormatDate from './utils/format-date'
 
-// 计时模式类型可选值
+/**
+ * 计时模式类型的可选值的枚举
+ *
+ * @since 1.1.0
+ * @readonly
+ * @property {string} +='+' - 正序计时模式可选值
+ * @property {string} inc='+' - 正序计时模式可选值
+ * @property {string} increse='+' - 正序计时模式可选值
+ * @property {string} plus='+' - 正序计时模式可选值
+ * @property {string} asc='+' - 正序计时模式可选值
+ * @property {string} \-='-' - 倒序计时模式可选值
+ * @property {string} dec='-' - 倒序计时模式可选值
+ * @property {string} decrese='-' - 倒序计时模式可选值
+ * @property {string} reduce='-' - 倒序计时模式可选值
+ * @property {string} desc='-' - 倒序计时模式可选值
+ */
 const MODE_TYPE = {
   '+': '+',
   'inc': '+',
@@ -29,17 +44,17 @@ const MODE_TYPE = {
  */
 const _actions = {
   /**
-   * 向下取整时间戳，调整指定时间的时间戳
+   * 返回向下取整后的时间戳
    * @param {number} [timeStamp=Date.now()] - 时间戳
-   * @returns {number} - 返回向下取整后的时间戳
+   * @returns {number}
    */
   timeStamp(timeStamp = Date.now()) {
     return Math.floor(timeStamp / 1000) * 1000
   },
   /**
-   * 格式化时间
+   * 格式化时间，返回formatDate实例
    * @param {Timer} self - timer实例
-   * @returns {FormatDate} - formatDate实例
+   * @returns {FormatDate}
    */
   formatDate(self) {
     const format = self.$options.format
@@ -65,21 +80,31 @@ const _actions = {
  */
 class Timer {
   /**
-   * 配置参数
+   * 默认配置选项
+   *
+   * @since 1.0.0
    * @static
    * @memberOf Timer
+   * @property {boolean} debug=false - 调试模式
+   * @property {string} format='mm:ss' - 日期时间格式化字符串
+   * @property {string} mode=- - 计时模式类型，可选值请参考 {@link MODE_TYPE}
    */
   static options = {
     // timeStamp: undefined, // 必须
-    debug: false, // 是否开启调试模式
-    format: 'mm:ss', // 格式化匹配模式
-    mode: '-', // 计时模式，代表倒计时的可选值请参考MODE_TYPE
+    debug: false, // 开启调试模式
+    format: 'mm:ss', // 日期时间格式化字符串
+    mode: '-', // 计时模式
   }
 
   /**
-   * 更改默认配置参数
+   * 更改配置选项
+   *
+   * @since 1.0.0
    * @static
-   * @param {object} [options] - 配置对象
+   * @param {object} options - 配置选项
+   * @param {boolean} [options.debug] - 调试模式
+   * @param {string} [options.format] - 日期时间格式化字符串
+   * @param {string} [options.mode] - 计时模式类型，可选值请参考 {@link MODE_TYPE}
    */
   static config(options) {
     const ctor = this
@@ -92,29 +117,31 @@ class Timer {
 
   /**
    * 构造函数
-   * @param {object} options - 计时器配置参数
-   * @param {number} options.timeStamp - 计时时间戳，毫秒旱位，且必须毫秒数为1000单位，不能是1234这样，超出时会自动向下取整
-   * @param {boolean} [options.debug] - 是否开启日志调试模式，默认关闭
-   * @param {string} [options.format='HH:mm'] - 日期时间格式
-   * @param {boolean} [options.mode=false] - 是否为正计时模式，false表示倒计时
+   *
+   * @param {object} options - 配置选项
+   * @param {number} options.timeStamp - 剩余计时时间戳，毫秒单位，且毫秒数必须为1000单位，不能是1234这样，超出时会自动向下取整
+   * @param {boolean} [options.debug] - 调试模式
+   * @param {string} [options.format] - 日期时间格式化字符串
+   * @param {string} [options.mode] - 计时模式类型，可选值请参考 {@link MODE_TYPE}
    */
   constructor(options) {
-    this._logger = new Logger({
-      name: 'timer',
-      debug: options.debug
-    })
-
     if (!options.timeStamp) {
-      this._logger.error('require timeStamp option param, please check!')
+      throw new error('require timeStamp option param, please check!')
     }
 
     const ctor = this.constructor
 
-    this.$status = 'prepare'
     this.$options = {
       ...ctor.options,
       ...options
     }
+
+    this._logger = new Logger({
+      name: 'timer',
+      debug: this.$options.debug
+    })
+
+    this.$status = 'prepare'
 
     // 当前时间戳
     this.$remainTimeStamp = _actions.timeStamp(this.$options.timeStamp)
@@ -127,129 +154,246 @@ class Timer {
     this._formatDate = _actions.formatDate(this)
   }
 
-  // 实例配置参数，取默认值
-  $options = undefined // 计时器配置选项
-  $status = undefined // 计时器当前状态
-  $timeouter = undefined // 计时器延迟ID
-  $timeZoneTimeStamp = new Date().getTimezoneOffset() * 1000 * 60 // 当前地区的偏移时区时间戳
-  $remainTimeStamp = undefined // 计时器剩余计时时间戳
-  $throughTimeStamp = undefined // 计时器已经过的时间戳
-  $startTimeStamp = undefined // 计时器开始计时时间戳
-  $stopTimeStamp = undefined // 计时器暂停计时时间戳
-  $endTimeStamp = undefined // 计时器开始计时起 => 计时器完成时的一轮周期计时时间戳
-  $currentTimeStamp = undefined // 当前时间的时间戳，用于修正计时器在空间维度中出现异常流逝的时间戳
-  $stopwatch = [] // 计时器暂停的妙表功能
-  _logger = undefined // 日志打印器，方便调试
-  _formatDate = undefined // 日期时间格式化实例
+  /**
+   * 实例配置项
+   *
+   * @since 1.0.0
+   * @readonly
+   */
+  $options = undefined
 
   /**
-   * 获取实例调式模式是否启用
+   * 实例状态，可能处于以下状态：prepare=准备创段、processing=进行中、finished=已完成、stoped=暂停中
    *
-   * @returns {string} - 返回实例调式模式是否启用
+   * @since 1.0.0
+   * @readonly
+   */
+  $status = undefined
+  /**
+   * 延迟即使器ID
+   *
+   * @since 1.0.0
+   * @readonly
+   */
+  $timeouter = undefined
+  /**
+   * 当前地区的偏移时区时间戳
+   *
+   * @since 1.0.0
+   * @readonly
+   */
+  $timeZoneTimeStamp = new Date().getTimezoneOffset() * 1000 * 60
+  /**
+   * 剩余计时时间戳
+   *
+   * @since 1.0.0
+   * @readonly
+   */
+  $remainTimeStamp = undefined
+  /**
+   * 已经过的时间戳
+   *
+   * @since 1.0.0
+   * @readonly
+   */
+  $throughTimeStamp = undefined
+
+  /**
+   * 开始计时时间戳
+   *
+   * @since 1.0.0
+   * @readonly
+   */
+  $startTimeStamp = undefined
+
+  /**
+   * 暂停计时时间戳
+   *
+   * @since 1.0.0
+   * @readonly
+   */
+  $stopTimeStamp = undefined
+
+  /**
+   * 计时器开始计时起 => 计时器完成时的一轮周期计时时间戳
+   *
+   * @since 1.0.0
+   * @readonly
+   */
+  $endTimeStamp = undefined
+  /**
+   * 当前时间的时间戳，用于修正计时器在空间维度中出现异常流逝的时间戳
+   *
+   * @since 1.0.0
+   * @readonly
+   */
+  $currentTimeStamp = undefined
+
+  /**
+   * 计时器每次记录的妙表功能
+   *
+   * @since 1.0.0
+   * @readonly
+   */
+  $stopwatch = []
+
+  /**
+   * 日志打印器，方便调试
+   *
+   * @since 1.0.0
+   * @private
+   */
+  _logger = undefined
+
+  /**
+   * 日期时间格式化实例
+   *
+   * @since 1.0.0
+   * @private
+   */
+  _formatDate = undefined
+
+  /**
+   * 获取实例的调试配置项
+   *
+   * @since 1.0.0
+   * @getter
+   * @returns {string}
    */
   get $debug() {
     return this._logger.$debug
   }
 
   /**
-   * 设置实例调式模式是否启用
+   * 设置实例的调试配置项
    *
-   * @readonly
+   * @since 1.0.0
+   * @setter
+   * @param {boolean} value - 是否启用
    */
   set $debug(value) {
     this._logger.$debug = value
   }
 
   /**
-   * 获取计时时间戳
+   * 获取实例的计时时间戳配置项
    *
-   * @returns {string} - 返回计时时间戳
+   * @since 1.0.0
+   * @getter
+   * @readonly
+   * @returns {string}
    */
   get $timeStamp() {
     return this.$options.timeStamp
   }
 
   /**
-   * 设置计时时间戳
+   * 设置实例的计时时间戳配置项
    *
-   * @readonly
+   * @since 1.0.0
+   * @setter
+   * @ignore
    */
   set $timeStamp(value) {
   }
 
   /**
-   * 获取实例日期格式化格式
+   * 获取实例的日期时间格式化配置项
    *
-   * @returns {string} - 返回实例日期格式化格式
+   * @since 1.0.0
+   * @getter
+   * @readonly
+   * @returns {string}
    */
   get $format() {
     return this.$options.format
   }
 
   /**
-   * 设置实例日期格式化格式
+   * 设置实例的日期时间格式化配置项
    *
+   * @since 1.0.0
+   * @setter
    * @readonly
+   * @ignore
    */
   set $format(value) {
   }
 
   /**
-   * 获取计时模式
+   * 获取实例的计时模式配置项
    *
-   * @returns {string} - 返回计时模式
+   * @since 1.0.0
+   * @getter
+   * @readonly
+   * @returns {string}
    */
   get $mode() {
     return MODE_TYPE[this.$options.mode]
   }
 
   /**
-   * 设置计时模式
+   * 设置实例的计时模式配置项
    *
-   * @readonly
+   * @since 1.0.0
+   * @setter
+   * @ignore
    */
   set $mode(value) {
   }
 
   /**
-   * 获取日期时间字符串
+   * 获取实例的日期时间字符串值
    *
-   * @returns {string} - 返回日期时间字符串
+   * @since 1.0.0
+   * @getter
+   * @readonly
+   * @returns {string}
    */
   get $datetime() {
     return this._formatDate.toString()
   }
 
   /**
-   * 设置日期时间字符串
+   * 设置实例的日期时间字符串值
    *
-   * @readonly
+   * @since 1.0.0
+   * @setter
+   * @ignore
    */
   set $datetime(value) {
   }
 
   /**
-   * 获取倒计时各具体的日期时间数据
+   * 获取实例的日期时间数据片断
    *
-   * @returns {string} - 返回倒计时各具体的日期时间数据
+   * @since 1.1.0
+   * @getter
+   * @readonly
+   * @returns {object}
    */
   get $data() {
     return this._formatDate.$data
   }
 
   /**
-   * 获取倒计时各具体的日期时间数据
+   * 设置实例的日期时间数据片断
    *
-   * @readonly
+   * @since 1.0.0
+   * @setter
+   * @ignore
    */
   set $data(value) {
   }
 
   /**
-   * 倒计时开始
-   * 倒计时结束后进入resolve，倒计时在未结束前中途造成暂停，会触发reject
-   * @param {function} callback - 倒计时每秒执行的回调函数
-   * @returns {Promise} 返回promise对象
+   * 计时器开始计时
+   * 计时器结束后进入resolved状态
+   * 若在未结束前中途造成暂停，会触发rejectd状态
+   *
+   * @since 1.0.0
+   * @param {function} callback - 每秒执行的回调函数
+   * @returns {Promise}
    */
   start(callback) {
     return new Promise((resolve, reject) => {
@@ -321,18 +465,21 @@ class Timer {
   }
 
   /**
-   * 秒表记录停止（时间不会停目）
-   * @returns {Timer} 返回实例自身
+   * 秒表：记录触发该操作的计时结果，保存结果的值将根据当前实例的format格式化
+   *
+   * @since 1.1.0
+   * @returns {Timer}
    */
   record() {
-    // 秒表记录
     this.$stopwatch.push(this.$datetime)
     return this
   }
 
   /**
    * 计时器停止
-   * @returns {Timer} 返回实例自身
+   *
+   * @since 1.0.0
+   * @returns {Timer}
    */
   stop() {
     clearTimeout(this.$timeouter)
@@ -346,7 +493,9 @@ class Timer {
 
   /**
    * 计时器复位
-   * @returns {Timer} 返回实例自身
+   *
+   * @since 1.0.0
+   * @returns {Timer}
    */
   reset() {
     clearTimeout(this.$timeouter)

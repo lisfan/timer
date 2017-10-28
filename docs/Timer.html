@@ -22,7 +22,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Timer.html">Timer</a><ul class='methods'><li data-type='method'><a href="Timer.html#.config">config</a></li><li data-type='method'><a href="Timer.html#start">start</a></li><li data-type='method'><a href="Timer.html#record">record</a></li><li data-type='method'><a href="Timer.html#stop">stop</a></li><li data-type='method'><a href="Timer.html#reset">reset</a></li></ul></li><li><a href="FormatDate.html">FormatDate</a><ul class='methods'><li data-type='method'><a href="FormatDate.html#.getFields">getFields</a></li><li data-type='method'><a href="FormatDate.html#.toString">toString</a></li></ul></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Timer.html">Timer</a><ul class='methods'><li data-type='method'><a href="Timer.html#.config">config</a></li><li data-type='method'><a href="Timer.html#start">start</a></li><li data-type='method'><a href="Timer.html#record">record</a></li><li data-type='method'><a href="Timer.html#stop">stop</a></li><li data-type='method'><a href="Timer.html#reset">reset</a></li></ul></li><li><a href="FormatDate.html">FormatDate</a><ul class='methods'><li data-type='method'><a href="FormatDate.html#.getFields">getFields</a></li><li data-type='method'><a href="FormatDate.html#.toString">toString</a></li><li data-type='method'><a href="FormatDate.html#toString">toString</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#MODE_TYPE">MODE_TYPE</a></li></ul>
 </nav>
 
 <div id="main">
@@ -69,7 +69,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line66">line 66</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line81">line 81</a>
     </li></ul></dd>
     
 
@@ -163,7 +163,7 @@
 
             
 
-            <td class="description last"><p>计时器配置参数</p>
+            <td class="description last"><p>配置选项</p>
                 <h6>Properties</h6>
                 
 
@@ -180,8 +180,6 @@
         <th>Attributes</th>
         
 
-        
-        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -216,12 +214,8 @@
             
 
             
-                <td class="default">
-                
-                </td>
-            
 
-            <td class="description last"><p>计时时间戳，毫秒旱位，且必须毫秒数为1000单位，不能是1234这样，超出时会自动向下取整</p></td>
+            <td class="description last"><p>剩余计时时间戳，毫秒单位，且毫秒数必须为1000单位，不能是1234这样，超出时会自动向下取整</p></td>
         </tr>
 
     
@@ -253,12 +247,8 @@
             
 
             
-                <td class="default">
-                
-                </td>
-            
 
-            <td class="description last"><p>是否开启日志调试模式，默认关闭</p></td>
+            <td class="description last"><p>调试模式</p></td>
         </tr>
 
     
@@ -290,14 +280,8 @@
             
 
             
-                <td class="default">
-                
-                    <code>'HH:mm'</code>
-                
-                </td>
-            
 
-            <td class="description last"><p>日期时间格式</p></td>
+            <td class="description last"><p>日期时间格式化字符串</p></td>
         </tr>
 
     
@@ -310,7 +294,7 @@
             <td class="type">
             
                 
-<span class="param-type">boolean</span>
+<span class="param-type">string</span>
 
 
             
@@ -329,14 +313,8 @@
             
 
             
-                <td class="default">
-                
-                    <code>false</code>
-                
-                </td>
-            
 
-            <td class="description last"><p>是否为正计时模式，false表示倒计时</p></td>
+            <td class="description last"><p>计时模式类型，可选值请参考 <a href="global.html#MODE_TYPE">MODE_TYPE</a></p></td>
         </tr>
 
     
@@ -394,12 +372,199 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line72">line 72</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line92">line 92</a>
     </li></ul></dd>
     
 
     
 
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>1.0.0</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>debug</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    <code>false</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>调试模式</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>format</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    <code>'mm:ss'</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>日期时间格式化字符串</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mode</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    <code>-</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>计时模式类型，可选值请参考 <a href="global.html#MODE_TYPE">MODE_TYPE</a></p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<div class="description">
+    <p>默认配置选项</p>
+</div>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="$options"><span class="type-signature">(readonly) </span>$options<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line163">line 163</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>1.0.0</li></ul></dd>
     
 
     
@@ -434,7 +599,667 @@
 
 
 <div class="description">
-    <p>配置参数</p>
+    <p>实例配置项</p>
+</div>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="$status"><span class="type-signature">(readonly) </span>$status<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line171">line 171</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>1.0.0</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>实例状态，可能处于以下状态：prepare=准备创段、processing=进行中、finished=已完成、stoped=暂停中</p>
+</div>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="$timeouter"><span class="type-signature">(readonly) </span>$timeouter<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line178">line 178</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>1.0.0</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>延迟即使器ID</p>
+</div>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="$timeZoneTimeStamp"><span class="type-signature">(readonly) </span>$timeZoneTimeStamp<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line185">line 185</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>1.0.0</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>当前地区的偏移时区时间戳</p>
+</div>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="$remainTimeStamp"><span class="type-signature">(readonly) </span>$remainTimeStamp<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line192">line 192</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>1.0.0</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>剩余计时时间戳</p>
+</div>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="$throughTimeStamp"><span class="type-signature">(readonly) </span>$throughTimeStamp<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line199">line 199</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>1.0.0</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>已经过的时间戳</p>
+</div>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="$startTimeStamp"><span class="type-signature">(readonly) </span>$startTimeStamp<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line207">line 207</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>1.0.0</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>开始计时时间戳</p>
+</div>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="$stopTimeStamp"><span class="type-signature">(readonly) </span>$stopTimeStamp<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line215">line 215</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>1.0.0</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>暂停计时时间戳</p>
+</div>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="$endTimeStamp"><span class="type-signature">(readonly) </span>$endTimeStamp<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line223">line 223</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>1.0.0</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>计时器开始计时起 =&gt; 计时器完成时的一轮周期计时时间戳</p>
+</div>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="$currentTimeStamp"><span class="type-signature">(readonly) </span>$currentTimeStamp<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line230">line 230</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>1.0.0</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>当前时间的时间戳，用于修正计时器在空间维度中出现异常流逝的时间戳</p>
+</div>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="$stopwatch"><span class="type-signature">(readonly) </span>$stopwatch<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line238">line 238</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>1.0.0</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>计时器每次记录的妙表功能</p>
 </div>
 
 
@@ -457,12 +1282,15 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line150">line 150</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line263">line 263</a>
     </li></ul></dd>
     
 
     
 
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>1.0.0</li></ul></dd>
     
 
     
@@ -497,7 +1325,7 @@
 
 
 <div class="description">
-    <p>获取实例调式模式是否启用</p>
+    <p>获取实例的调试配置项</p>
 </div>
 
 
@@ -509,7 +1337,7 @@
 
         
             
-<h4 class="name" id="$debug"><span class="type-signature">(readonly) </span>$debug<span class="type-signature"></span></h4>
+<h4 class="name" id="$debug"><span class="type-signature"></span>$debug<span class="type-signature"></span></h4>
 
 
 
@@ -520,12 +1348,15 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line159">line 159</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line274">line 274</a>
     </li></ul></dd>
     
 
     
 
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>1.0.0</li></ul></dd>
     
 
     
@@ -560,70 +1391,7 @@
 
 
 <div class="description">
-    <p>设置实例调式模式是否启用</p>
-</div>
-
-
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="$timeStamp"><span class="type-signature"></span>$timeStamp<span class="type-signature"></span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line168">line 168</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    <p>获取计时时间戳</p>
+    <p>设置实例的调试配置项</p>
 </div>
 
 
@@ -646,12 +1414,15 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line177">line 177</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line286">line 286</a>
     </li></ul></dd>
     
 
     
 
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>1.0.0</li></ul></dd>
     
 
     
@@ -686,70 +1457,7 @@
 
 
 <div class="description">
-    <p>设置计时时间戳</p>
-</div>
-
-
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="$format"><span class="type-signature"></span>$format<span class="type-signature"></span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line185">line 185</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    <p>获取实例日期格式化格式</p>
+    <p>获取实例的计时时间戳配置项</p>
 </div>
 
 
@@ -772,12 +1480,15 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line194">line 194</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line308">line 308</a>
     </li></ul></dd>
     
 
     
 
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>1.0.0</li></ul></dd>
     
 
     
@@ -812,70 +1523,7 @@
 
 
 <div class="description">
-    <p>设置实例日期格式化格式</p>
-</div>
-
-
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="$mode"><span class="type-signature"></span>$mode<span class="type-signature"></span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line202">line 202</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    <p>获取计时模式</p>
+    <p>获取实例的日期时间格式化配置项</p>
 </div>
 
 
@@ -898,12 +1546,15 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line211">line 211</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line331">line 331</a>
     </li></ul></dd>
     
 
     
 
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>1.0.0</li></ul></dd>
     
 
     
@@ -938,70 +1589,7 @@
 
 
 <div class="description">
-    <p>设置计时模式</p>
-</div>
-
-
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="$datetime"><span class="type-signature"></span>$datetime<span class="type-signature"></span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line219">line 219</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    <p>获取日期时间字符串</p>
+    <p>获取实例的计时模式配置项</p>
 </div>
 
 
@@ -1024,12 +1612,15 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line228">line 228</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line353">line 353</a>
     </li></ul></dd>
     
 
     
 
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>1.0.0</li></ul></dd>
     
 
     
@@ -1064,70 +1655,7 @@
 
 
 <div class="description">
-    <p>设置日期时间字符串</p>
-</div>
-
-
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="$data"><span class="type-signature"></span>$data<span class="type-signature"></span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line236">line 236</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    <p>获取倒计时各具体的日期时间数据</p>
+    <p>获取实例的日期时间字符串值</p>
 </div>
 
 
@@ -1150,12 +1678,15 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line245">line 245</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line375">line 375</a>
     </li></ul></dd>
     
 
     
 
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>1.1.0</li></ul></dd>
     
 
     
@@ -1190,7 +1721,7 @@
 
 
 <div class="description">
-    <p>获取倒计时各具体的日期时间数据</p>
+    <p>获取实例的日期时间数据片断</p>
 </div>
 
 
@@ -1211,7 +1742,7 @@
 
     
 
-    <h4 class="name" id=".config"><span class="type-signature">(static) </span>config<span class="signature">(options<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".config"><span class="type-signature">(static) </span>config<span class="signature">(options)</span><span class="type-signature"></span></h4>
 
     
 
@@ -1223,12 +1754,15 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line84">line 84</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line109">line 109</a>
     </li></ul></dd>
     
 
     
 
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>1.0.0</li></ul></dd>
     
 
     
@@ -1263,7 +1797,7 @@
 
 
 <div class="description">
-    <p>更改默认配置参数</p>
+    <p>更改配置选项</p>
 </div>
 
 
@@ -1288,8 +1822,6 @@
 
         <th>Type</th>
 
-        
-        <th>Attributes</th>
         
 
         
@@ -1316,6 +1848,50 @@
             </td>
 
             
+
+            
+
+            <td class="description last"><p>配置选项</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>debug</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
                 <td class="attributes">
                 
                     &lt;optional><br>
@@ -1329,7 +1905,80 @@
 
             
 
-            <td class="description last"><p>配置对象</p></td>
+            <td class="description last"><p>调试模式</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>format</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>日期时间格式化字符串</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mode</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>计时模式类型，可选值请参考 <a href="global.html#MODE_TYPE">MODE_TYPE</a></p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -1368,12 +2017,15 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line254">line 254</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line398">line 398</a>
     </li></ul></dd>
     
 
     
 
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>1.0.0</li></ul></dd>
     
 
     
@@ -1408,7 +2060,7 @@
 
 
 <div class="description">
-    <p>倒计时开始<br>倒计时结束后进入resolve，倒计时在未结束前中途造成暂停，会触发reject</p>
+    <p>计时器开始计时<br>计时器结束后进入resolved状态<br>若在未结束前中途造成暂停，会触发rejectd状态</p>
 </div>
 
 
@@ -1462,7 +2114,7 @@
 
             
 
-            <td class="description last"><p>倒计时每秒执行的回调函数</p></td>
+            <td class="description last"><p>每秒执行的回调函数</p></td>
         </tr>
 
     
@@ -1485,10 +2137,6 @@
 <h5>Returns:</h5>
 
         
-<div class="param-desc">
-    <p>返回promise对象</p>
-</div>
-
 
 
 <dl class="param-type">
@@ -1523,12 +2171,15 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line327">line 327</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line473">line 473</a>
     </li></ul></dd>
     
 
     
 
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>1.1.0</li></ul></dd>
     
 
     
@@ -1563,7 +2214,7 @@
 
 
 <div class="description">
-    <p>秒表记录停止（时间不会停目）</p>
+    <p>秒表：记录触发该操作的计时结果，保存结果的值将根据当前实例的format格式化</p>
 </div>
 
 
@@ -1591,10 +2242,6 @@
 <h5>Returns:</h5>
 
         
-<div class="param-desc">
-    <p>返回实例自身</p>
-</div>
-
 
 
 <dl class="param-type">
@@ -1629,12 +2276,15 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line337">line 337</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line484">line 484</a>
     </li></ul></dd>
     
 
     
 
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>1.0.0</li></ul></dd>
     
 
     
@@ -1697,10 +2347,6 @@
 <h5>Returns:</h5>
 
         
-<div class="param-desc">
-    <p>返回实例自身</p>
-</div>
-
 
 
 <dl class="param-type">
@@ -1735,12 +2381,15 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line351">line 351</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line500">line 500</a>
     </li></ul></dd>
     
 
     
 
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>1.0.0</li></ul></dd>
     
 
     
@@ -1803,10 +2452,6 @@
 <h5>Returns:</h5>
 
         
-<div class="param-desc">
-    <p>返回实例自身</p>
-</div>
-
 
 
 <dl class="param-type">
@@ -1842,7 +2487,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Oct 27 2017 21:12:11 GMT+0800 (CST) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Oct 28 2017 16:01:23 GMT+0800 (CST) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
