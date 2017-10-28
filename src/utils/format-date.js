@@ -3,6 +3,7 @@
  * @author lisfan <goolisfan@gmail.com>
  * @version 1.0.0
  * @licence MIT
+ * @ignore
  */
 
 import validation from '@~lisfan/validation'
