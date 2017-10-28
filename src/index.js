@@ -74,8 +74,7 @@ const _actions = {
 }
 
 /**
- * 日志打印类
- *
+ * @classdesc 计时类
  * @class
  */
 class Timer {
