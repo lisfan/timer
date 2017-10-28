@@ -97,7 +97,7 @@ class Timer {
   }
 
   /**
-   * 更改配置选项
+   * 更新默认配置选项
    *
    * @since 1.0.0
    * @static
@@ -171,7 +171,7 @@ class Timer {
    */
   $status = undefined
   /**
-   * 延迟即使器ID
+   * 延迟计时器ID
    *
    * @since 1.0.0
    * @readonly
