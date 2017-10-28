@@ -10,7 +10,7 @@ import Logger from '@~lisfan/logger'
 
 const logger = new Logger('format-date')
 
-// 日期时间格式化模式匹配值
+// 日期时间格式化模式匹配数据片段映射
 const DATETIME_PATTERN = {
   'Y': 'year',
   'M': 'month',
@@ -45,7 +45,8 @@ class FormatDate {
    *
    * @param {object} options - 配置对象
    * @param {number|string|Date} options.date - 可以被格式为时间的值
-   * @param {string} [options.format='mm:ss'] - 日期时间格式化字符串，日期时间格式化字符串支持使用字母匹配对应的年月日时分秒
+   * @param {string} [options.format='mm:ss'] -
+   *   日期时间格式化字符串，支持使用字母占位符匹配对应的年月日时分秒：Y=年、M=月、D=日、h=时、m=分、s=秒、ms=毫秒，年和毫秒字母占位符可以使用1-4个，其他占位符可以使用1-2个，如果实际结果值长度大于占位符的长度，则显示值实际结果值，如果小于，则前置用0补足
    */
   constructor(options) {
     if (!validation.isNumber(options.date) && !validation.isString(options.date) && !validation.isDate(options.date)) {
@@ -67,8 +68,6 @@ class FormatDate {
    * @function
    * @param {number|string|Date} date - 可以被格式为时间的值
    * @param {string} [format='mm:ss'] - 日期时间格式化字符串
-   * 如果指定长度小于要值长度，则显示值长度
-   * 如果不足，前置用0补足
    * @returns {object}
    */
   static getFields(date, format = FormatDate.options.format) {
