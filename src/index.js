@@ -10,7 +10,7 @@ import Logger from '@~lisfan/logger'
 import FormatDate from './utils/format-date'
 
 /**
- * 计时模式类型的可选值的枚举
+ * 计时模式类型的可选值可以是如下几种
  *
  * @since 1.1.0
  * @readonly
@@ -370,7 +370,13 @@ class Timer {
    * @since 1.1.0
    * @getter
    * @readonly
-   * @returns {object}
+   * @property {string} [year] - 剩余年数
+   * @property {string} [month] - 剩余月数
+   * @property {string} [date] - 剩余日数
+   * @property {string} [hour] - 剩余时数
+   * @property {string} [minute] - 剩余分数
+   * @property {string} [second] - 剩余秒数
+   * @property {string} [millisecond] - 剩余毫秒数
    */
   get $data() {
     return this._formatDate.$data

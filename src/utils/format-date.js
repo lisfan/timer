@@ -25,6 +25,7 @@ const DATETIME_PATTERN = {
  * 计时器格式化类
  *
  * @class
+ * @ignore
  */
 class FormatDate {
   /**
