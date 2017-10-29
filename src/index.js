@@ -294,8 +294,8 @@ class Timer {
    * @setter
    * @ignore
    */
-  set $timeStamp(value) {
-  }
+  // set $timeStamp(value) {
+  // }
 
   /**
    * 获取实例的日期时间格式化配置项
@@ -317,8 +317,8 @@ class Timer {
    * @readonly
    * @ignore
    */
-  set $format(value) {
-  }
+  // set $format(value) {
+  // }
 
   /**
    * 获取实例的计时模式配置项
@@ -339,8 +339,8 @@ class Timer {
    * @setter
    * @ignore
    */
-  set $mode(value) {
-  }
+  // set $mode(value) {
+  // }
 
   /**
    * 获取实例的日期时间字符串值
@@ -361,8 +361,8 @@ class Timer {
    * @setter
    * @ignore
    */
-  set $datetime(value) {
-  }
+  // set $datetime(value) {
+  // }
 
   /**
    * 获取实例的日期时间数据片断
@@ -389,8 +389,8 @@ class Timer {
    * @setter
    * @ignore
    */
-  set $data(value) {
-  }
+  // set $data(value) {
+  // }
 
   /**
    * 计时器开始计时
