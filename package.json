@@ -31,11 +31,11 @@
   },
   "homepage": "https://github.com/lisfan/timer#readme",
   "dependencies": {
-    "@~lisfan/logger": "^1.1.0-rc.14",
-    "@~lisfan/validation": "^1.0.0-rc.11"
+    "@~lisfan/logger": "~1.1.0-rc.14",
+    "@~lisfan/validation": "~1.0.0-rc.11"
   },
   "devDependencies": {
-    "docdash": "^0.4.0",
-    "jsdoc": "^3.5.5"
+    "docdash": "~0.4.0",
+    "jsdoc": "~3.5.5"
   }
 }
