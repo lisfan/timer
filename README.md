@@ -21,7 +21,7 @@ npm install -S @~lisfan/timer
 
 ## Usage 起步
 
-``` js
+```js
 import Timer from '@~lisfan/timer'
 
 const timer = new Timer({
