@@ -1,6 +1,6 @@
 {
   "name": "@~lisfan/timer",
-  "version": "1.1.0-rc.12",
+  "version": "1.1.0-rc.13",
   "description": "计时器",
   "main": "src/index.js",
   "scripts": {
@@ -31,8 +31,8 @@
   },
   "homepage": "https://github.com/lisfan/timer#readme",
   "dependencies": {
-    "@~lisfan/logger": "~1.3.0-rc.0",
-    "@~lisfan/validation": "~1.0.0-rc.0"
+    "@~lisfan/logger": "~1.3.0-rc.1",
+    "@~lisfan/validation": "~1.0.0-rc.12"
   },
   "devDependencies": {
     "docdash": "~0.4.0",
