@@ -1,4 +1,6 @@
-# Timer 计时器
+# Timer
+
+## 计时器
 
 [API documentation](https://lisfan.github.io/timer/)
 
