@@ -337,10 +337,10 @@ class Timer {
         // 倒计时也可能在一些途中超时挂起，导致倒计时没有再走下去，所以每次需要重新捕获
         this.$currentTimeStamp = _actions.timeStamp()
 
-        this._logger.log('throughTimeStamp', ((this.$throughTimeStamp / 1000) + 1) + 's')
-
         this.$remainTimeStamp -= 1000
         this.$throughTimeStamp += 1000
+
+        this._logger.log('throughTimeStamp', ((this.$throughTimeStamp / 1000) ) + 's')
 
         if (this.$currentTimeStamp > (this.$startTimeStamp + this.$throughTimeStamp)) {
           this._logger.log('超过时间流速，自动修正!')
