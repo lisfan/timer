@@ -7,36 +7,9 @@
 
 import validation from '@~lisfan/validation'
 import Logger from '@~lisfan/logger'
-import FormatDate from './utils/format-date'
 
-/**
- * 计时模式类型的可选值可以是如下几种
- *
- * @since 1.1.0
- * @readonly
- * @property {string} +='+' - 正序计时模式可选值
- * @property {string} inc='+' - 正序计时模式可选值
- * @property {string} increse='+' - 正序计时模式可选值
- * @property {string} plus='+' - 正序计时模式可选值
- * @property {string} asc='+' - 正序计时模式可选值
- * @property {string} \-='-' - 倒序计时模式可选值
- * @property {string} dec='-' - 倒序计时模式可选值
- * @property {string} decrese='-' - 倒序计时模式可选值
- * @property {string} reduce='-' - 倒序计时模式可选值
- * @property {string} desc='-' - 倒序计时模式可选值
- */
-const MODE_TYPE = {
-  '+': '+',
-  'inc': '+',
-  'increse': '+',
-  'plus': '+',
-  'asc': '+',
-  '-': '-',
-  'dec': '-',
-  'decrese': '-',
-  'reduce': '-',
-  'desc': '-',
-}
+import FormatDate from './utils/format-date'
+import MODE_TYPE from './enums/mode-type'
 
 /**
  * 私有行为
@@ -57,10 +30,9 @@ const _actions = {
    * @returns {FormatDate}
    */
   formatDate(self) {
-    const format = self.$options.format
     let date
 
-    if (this.$mode === '+') {
+    if (self.$mode === '+') {
       date = (self.$options.timeStamp - self.$remainTimeStamp) + self.$timeZoneTimeStamp
     } else {
       date = self.$remainTimeStamp + self.$timeZoneTimeStamp
@@ -68,13 +40,15 @@ const _actions = {
 
     return new FormatDate({
       date,
-      format
+      format: this.$format
     })
   }
 }
 
 /**
- * @classdesc 计时类
+ * @classdesc
+ * 计时类
+ *
  * @class
  */
 class Timer {
@@ -83,6 +57,7 @@ class Timer {
    *
    * @since 1.0.0
    * @static
+   * @readonly
    * @memberOf Timer
    * @property {boolean} debug=false - 调试模式
    * @property {string} format='mm:ss' - 日期时间格式化字符串
@@ -125,10 +100,6 @@ class Timer {
    * @param {string} [options.mode] - 计时模式类型，可选值请参考 {@link MODE_TYPE}
    */
   constructor(options) {
-    if (!options.timeStamp) {
-      throw new error('require timeStamp option param, please check!')
-    }
-
     const ctor = this.constructor
 
     this.$options = {
@@ -140,6 +111,10 @@ class Timer {
       name: 'timer',
       debug: this.$options.debug
     })
+
+    if (!this.$options.timeStamp) {
+      this._logger.error('require timeStamp option param, please check!')
+    }
 
     this.$status = 'prepare'
 
@@ -153,6 +128,30 @@ class Timer {
     // 如果是倒计时，则将当前的时间设置为最大值
     this._formatDate = _actions.formatDate(this)
   }
+
+  /**
+   * 日志打印器，方便调试
+   *
+   * @since 1.0.0
+   * @private
+   */
+  _logger = undefined
+
+  /**
+   * 日期时间格式化实例
+   *
+   * @since 1.0.0
+   * @private
+   */
+  _formatDate = undefined
+
+  /**
+   * 延迟计时器ID
+   *
+   * @since 1.0.0
+   * @readonly
+   */
+  _timeouter = undefined
 
   /**
    * 实例配置项
@@ -169,13 +168,7 @@ class Timer {
    * @readonly
    */
   $status = undefined
-  /**
-   * 延迟计时器ID
-   *
-   * @since 1.0.0
-   * @readonly
-   */
-  $timeouter = undefined
+
   /**
    * 当前地区的偏移时区时间戳
    *
@@ -238,22 +231,6 @@ class Timer {
   $stopwatch = []
 
   /**
-   * 日志打印器，方便调试
-   *
-   * @since 1.0.0
-   * @private
-   */
-  _logger = undefined
-
-  /**
-   * 日期时间格式化实例
-   *
-   * @since 1.0.0
-   * @private
-   */
-  _formatDate = undefined
-
-  /**
    * 获取实例的调试配置项
    *
    * @since 1.0.0
@@ -262,17 +239,6 @@ class Timer {
    */
   get $debug() {
     return this._logger.$debug
-  }
-
-  /**
-   * 设置实例的调试配置项
-   *
-   * @since 1.0.0
-   * @setter
-   * @param {boolean} value - 是否启用
-   */
-  set $debug(value) {
-    this._logger.$debug = value
   }
 
   /**
@@ -288,16 +254,6 @@ class Timer {
   }
 
   /**
-   * 设置实例的计时时间戳配置项
-   *
-   * @since 1.0.0
-   * @setter
-   * @ignore
-   */
-  // set $timeStamp(value) {
-  // }
-
-  /**
    * 获取实例的日期时间格式化配置项
    *
    * @since 1.0.0
@@ -308,17 +264,6 @@ class Timer {
   get $format() {
     return this.$options.format
   }
-
-  /**
-   * 设置实例的日期时间格式化配置项
-   *
-   * @since 1.0.0
-   * @setter
-   * @readonly
-   * @ignore
-   */
-  // set $format(value) {
-  // }
 
   /**
    * 获取实例的计时模式配置项
@@ -333,16 +278,6 @@ class Timer {
   }
 
   /**
-   * 设置实例的计时模式配置项
-   *
-   * @since 1.0.0
-   * @setter
-   * @ignore
-   */
-  // set $mode(value) {
-  // }
-
-  /**
    * 获取实例的日期时间字符串值
    *
    * @since 1.0.0
@@ -353,16 +288,6 @@ class Timer {
   get $datetime() {
     return this._formatDate.toString()
   }
-
-  /**
-   * 设置实例的日期时间字符串值
-   *
-   * @since 1.0.0
-   * @setter
-   * @ignore
-   */
-  // set $datetime(value) {
-  // }
 
   /**
    * 获取实例的日期时间数据片断
@@ -383,16 +308,6 @@ class Timer {
   }
 
   /**
-   * 设置实例的日期时间数据片断
-   *
-   * @since 1.0.0
-   * @setter
-   * @ignore
-   */
-  // set $data(value) {
-  // }
-
-  /**
    * 计时器开始计时
    * 计时器结束后进入resolved状态
    * 若在未结束前中途造成暂停，会触发rejectd状态
@@ -406,7 +321,7 @@ class Timer {
       this.$status = 'processing'
 
       // 记录启动时间时间戳
-      this.$startTimeStamp = _actions.timeStamp() + 1000
+      this.$startTimeStamp = _actions.timeStamp()
 
       // 设置结束时间戳
       this.$endTimeStamp = this.$startTimeStamp + this.$remainTimeStamp
@@ -422,8 +337,6 @@ class Timer {
         // 倒计时也可能在一些途中超时挂起，导致倒计时没有再走下去，所以每次需要重新捕获
         this.$currentTimeStamp = _actions.timeStamp()
 
-        // this._logger.log('currentTimeStamp', new Date(this.$currentTimeStamp).toLocaleString())
-        // this._logger.log('startTimeStamp', new Date(this.$startTimeStamp).toLocaleString())
         this._logger.log('throughTimeStamp', ((this.$throughTimeStamp / 1000) + 1) + 's')
 
         if (this.$currentTimeStamp > (this.$startTimeStamp + this.$throughTimeStamp)) {
@@ -451,20 +364,20 @@ class Timer {
         }
 
         /* eslint-enable max-len*/
-        if (this.$timeouter && this.$currentTimeStamp >= this.$endTimeStamp - 1000) {
-          clearTimeout(this.$timeouter)
-          this.$timeouter = undefined
+        if (this._timeouter && this.$currentTimeStamp >= this.$endTimeStamp) {
+          clearTimeout(this._timeouter)
+          this._timeouter = undefined
 
           this.$status = 'finished'
           resolve(this.$status)
         } else {
-          this.$timeouter = setTimeout(() => {
+          this._timeouter = setTimeout(() => {
             dingdong()
           }, 1000)
         }
       }
 
-      this.$timeouter = setTimeout(() => {
+      this._timeouter = setTimeout(() => {
         dingdong()
       }, 1000)
     })
@@ -488,8 +401,8 @@ class Timer {
    * @returns {Timer}
    */
   stop() {
-    clearTimeout(this.$timeouter)
-    this.$timeouter = undefined
+    clearTimeout(this._timeouter)
+    this._timeouter = undefined
 
     this.$status = 'stoped'
     this.$stopTimeStamp = _actions.timeStamp()
@@ -504,8 +417,8 @@ class Timer {
    * @returns {Timer}
    */
   reset() {
-    clearTimeout(this.$timeouter)
-    this.$timeouter = undefined
+    clearTimeout(this._timeouter)
+    this._timeouter = undefined
 
     // 秒表复位
     this.$stopwatch = []
