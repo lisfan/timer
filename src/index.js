@@ -339,15 +339,15 @@ class Timer {
 
         this._logger.log('throughTimeStamp', ((this.$throughTimeStamp / 1000) + 1) + 's')
 
+        this.$remainTimeStamp -= 1000
+        this.$throughTimeStamp += 1000
+
         if (this.$currentTimeStamp > (this.$startTimeStamp + this.$throughTimeStamp)) {
           this._logger.log('超过时间流速，自动修正!')
           // 超过的时间流速
           const lostTime = this.$currentTimeStamp - this.$startTimeStamp
           this.$remainTimeStamp = this.$options.timeStamp - lostTime - 1000
           this.$throughTimeStamp = lostTime + 1000
-        } else {
-          this.$remainTimeStamp -= 1000
-          this.$throughTimeStamp += 1000
         }
 
         // 计时时间已到达
