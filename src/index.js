@@ -1,7 +1,7 @@
 /**
  * @file 计时器
  * @author lisfan <goolisfan@gmail.com>
- * @version 1.1.0
+ * @version 1.1.1
  * @licence MIT
  */
 
@@ -40,7 +40,7 @@ const _actions = {
 
     return new FormatDate({
       date,
-      format: this.$format
+      format: self.$format
     })
   }
 }
