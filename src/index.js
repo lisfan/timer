@@ -1,7 +1,7 @@
 /**
  * @file 计时器
  * @author lisfan <goolisfan@gmail.com>
- * @version 1.1.0
+ * @version 1.1.1
  * @licence MIT
  */
 
@@ -40,7 +40,7 @@ const _actions = {
 
     return new FormatDate({
       date,
-      format: this.$format
+      format: self.$format
     })
   }
 }
@@ -327,7 +327,7 @@ class Timer {
       this.$endTimeStamp = this.$startTimeStamp + this.$remainTimeStamp
 
       // 计时函数
-      const dingdong = () => {
+      const ticktick = () => {
         // 如果当前已暂停，则停止倒计时
         if (this.$status !== 'processing') {
           return reject(this.$status)
@@ -340,7 +340,7 @@ class Timer {
         this.$remainTimeStamp -= 1000
         this.$throughTimeStamp += 1000
 
-        this._logger.log('throughTimeStamp', ((this.$throughTimeStamp / 1000) ) + 's')
+        this._logger.log('tick tick...', ((this.$throughTimeStamp / 1000) ) + 's')
 
         if (this.$currentTimeStamp > (this.$startTimeStamp + this.$throughTimeStamp)) {
           this._logger.log('超过时间流速，自动修正!')
@@ -372,13 +372,13 @@ class Timer {
           resolve(this.$status)
         } else {
           this._timeouter = setTimeout(() => {
-            dingdong()
+            ticktick()
           }, 1000)
         }
       }
 
       this._timeouter = setTimeout(() => {
-        dingdong()
+        ticktick()
       }, 1000)
     })
   }
