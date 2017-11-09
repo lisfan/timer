@@ -39,12 +39,12 @@ timer.start((timer) => {
     console.log('中途造成计时中断')
 })
 
-// 计时暂停并开始
+// 计时暂停
 timer.stop()
 // 计时继续
 timer.start().then(...).catch(...)
 
-// 计时复位并开始
+// 计时复位
 timer.reset()
 // 计时开始
 timer.start().then(...).catch(...)

@@ -1,6 +1,6 @@
 {
   "name": "@~lisfan/timer",
-  "version": "1.1.2",
+  "version": "1.1.1",
   "description": "计时器",
   "main": "src/index.js",
   "scripts": {
