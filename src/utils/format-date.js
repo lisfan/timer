@@ -96,13 +96,13 @@ class FormatDate {
       const matched = format.match(regexp)
 
       if (matched) {
-        const value = fields[pattern].toString()
+        const value = fields[pattern] + ''
         const valueLen = value.length
         const patternLen = matched[0].length
         // 如果指定长度小于要值长度，则显示值长度
         // 如果不足，前置用0补足
         if (patternLen >= valueLen) {
-          formatFields[dateStr] = value.padStart(patternLen, '0')
+          formatFields[dateStr] = '0'.repeat(patternLen - valueLen) + value
         } else {
           formatFields[dateStr] = value
         }
