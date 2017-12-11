@@ -69,7 +69,7 @@ class FormatDate {
    * @function
    * @param {number|string|Date} date - 可以被格式为时间的值
    * @param {string} [format='mm:ss'] - 日期时间格式化字符串
-   * @returns {object}
+   * @return {object}
    */
   static getFields(date, format = FormatDate.options.format) {
     if (!validation.isNumber(date) && !validation.isString(date) && !validation.isDate(date)) {
@@ -118,7 +118,7 @@ class FormatDate {
    * @since 1.0.0
    * @param {number|string|Date|object} dateOrFields - 可以被格式为时间的值，或者已经被提前的日期时间值片断
    * @param {string} [format='mm:ss'] - 日期时间格式化字符串
-   * @returns {string}
+   * @return {string}
    */
   static toString(dateOrFields, format = FormatDate.options.format) {
     const ctor = this
@@ -155,7 +155,7 @@ class FormatDate {
    * @since 1.0.0
    * @getter
    * @readonly
-   * @returns {object}
+   * @return {object}
    */
   get $data() {
     const ctor = this.constructor
@@ -178,7 +178,7 @@ class FormatDate {
    * @since 1.0.0
    * @getter
    * @readonly
-   * @returns {object}
+   * @return {object}
    */
   get $date() {
     return this.$options.date
@@ -200,7 +200,7 @@ class FormatDate {
    * @since 1.0.0
    * @getter
    * @readonly
-   * @returns {string}
+   * @return {string}
    */
   get $format() {
     return this.$options.format
@@ -220,7 +220,7 @@ class FormatDate {
    * 日期时间数据转换成字符串
    *
    * @since 1.0.0
-   * @returns {string}
+   * @return {string}
    */
   toString() {
     const ctor = this.constructor
