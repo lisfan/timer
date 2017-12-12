@@ -19,7 +19,7 @@ const _actions = {
   /**
    * 返回向下取整后的时间戳
    * @param {number} [timeStamp=Date.now()] - 时间戳
-   * @return {number}
+   * @returns {number}
    */
   timeStamp(timeStamp = Date.now()) {
     return Math.floor(timeStamp / 1000) * 1000
@@ -27,7 +27,7 @@ const _actions = {
   /**
    * 格式化时间，返回formatDate实例
    * @param {Timer} self - timer实例
-   * @return {FormatDate}
+   * @returns {FormatDate}
    */
   formatDate(self) {
     let date
@@ -236,7 +236,7 @@ class Timer {
    * @since 1.0.0
    * @getter
    * @readonly
-   * @return {string}
+   * @returns {string}
    */
   get $debug() {
     return this._logger.$debug
@@ -248,7 +248,7 @@ class Timer {
    * @since 1.0.0
    * @getter
    * @readonly
-   * @return {string}
+   * @returns {string}
    */
   get $timeStamp() {
     return this.$options.timeStamp
@@ -260,7 +260,7 @@ class Timer {
    * @since 1.0.0
    * @getter
    * @readonly
-   * @return {string}
+   * @returns {string}
    */
   get $format() {
     return this.$options.format
@@ -272,7 +272,7 @@ class Timer {
    * @since 1.0.0
    * @getter
    * @readonly
-   * @return {string}
+   * @returns {string}
    */
   get $mode() {
     return MODE_TYPE[this.$options.mode]
@@ -284,7 +284,7 @@ class Timer {
    * @since 1.0.0
    * @getter
    * @readonly
-   * @return {string}
+   * @returns {string}
    */
   get $datetime() {
     return this._formatDate.toString()
@@ -315,7 +315,7 @@ class Timer {
    *
    * @since 1.0.0
    * @param {function} callback - 每秒执行的回调函数
-   * @return {Promise}
+   * @returns {Promise}
    */
   start(callback) {
     return new Promise((resolve, reject) => {
@@ -388,7 +388,7 @@ class Timer {
    * 秒表：记录触发该操作的计时结果，保存结果的值将根据当前实例的format格式化
    *
    * @since 1.1.0
-   * @return {Timer}
+   * @returns {Timer}
    */
   record() {
     this.$stopwatch.push(this.$datetime)
@@ -399,7 +399,7 @@ class Timer {
    * 计时器停止
    *
    * @since 1.0.0
-   * @return {Timer}
+   * @returns {Timer}
    */
   stop() {
     clearTimeout(this._timeouter)
@@ -415,7 +415,7 @@ class Timer {
    * 计时器复位
    *
    * @since 1.0.0
-   * @return {Timer}
+   * @returns {Timer}
    */
   reset() {
     clearTimeout(this._timeouter)
