@@ -3,7 +3,6 @@
  * @author lisfan <goolisfan@gmail.com>
  * @version 1.0.0
  * @licence MIT
- * @ignore
  */
 
 import validation from '@~lisfan/validation'
@@ -26,7 +25,6 @@ const DATETIME_PATTERN = {
  * 计时器格式化类
  *
  * @class
- * @ignore
  */
 class FormatDate {
   /**

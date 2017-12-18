@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>index.js - Documentation</title>
+    <title>timer.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -22,12 +22,12 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Timer.html">Timer</a><ul class='methods'><li data-type='method'><a href="Timer.html#.config">config</a></li><li data-type='method'><a href="Timer.html#start">start</a></li><li data-type='method'><a href="Timer.html#record">record</a></li><li data-type='method'><a href="Timer.html#stop">stop</a></li><li data-type='method'><a href="Timer.html#reset">reset</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#MODE_TYPE">MODE_TYPE</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Timer.html">Timer</a><ul class='methods'><li data-type='method'><a href="Timer.html#.config">config</a></li><li data-type='method'><a href="Timer.html#start">start</a></li><li data-type='method'><a href="Timer.html#record">record</a></li><li data-type='method'><a href="Timer.html#stop">stop</a></li><li data-type='method'><a href="Timer.html#reset">reset</a></li></ul></li><li><a href="FormatDate.html">FormatDate</a><ul class='methods'><li data-type='method'><a href="FormatDate.html#.getFields">getFields</a></li><li data-type='method'><a href="FormatDate.html#.toString">toString</a></li><li data-type='method'><a href="FormatDate.html#toString">toString</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#MODE_TYPE">MODE_TYPE</a></li></ul>
 </nav>
 
 <div id="main">
     
-    <h1 class="page-title">index.js</h1>
+    <h1 class="page-title">timer.js</h1>
     
 
     
@@ -40,7 +40,7 @@
             <pre class="prettyprint source linenums"><code>/**
  * @file 计时器
  * @author lisfan &lt;goolisfan@gmail.com>
- * @version 1.1.1
+ * @version 1.1.2
  * @licence MIT
  */
 
@@ -57,7 +57,11 @@ import MODE_TYPE from './enums/mode-type'
 const _actions = {
   /**
    * 返回向下取整后的时间戳
+   *
+   * @since 1.1.0
+   *
    * @param {number} [timeStamp=Date.now()] - 时间戳
+   *
    * @returns {number}
    */
   timeStamp(timeStamp = Date.now()) {
@@ -65,7 +69,11 @@ const _actions = {
   },
   /**
    * 格式化时间，返回formatDate实例
+   *
+   * @since 1.1.0
+   *
    * @param {Timer} self - timer实例
+   *
    * @returns {FormatDate}
    */
   formatDate(self) {
@@ -95,9 +103,11 @@ class Timer {
    * 默认配置选项
    *
    * @since 1.0.0
+   *
    * @static
    * @readonly
    * @memberOf Timer
+   *
    * @property {boolean} debug=false - 调试模式
    * @property {string} format='mm:ss' - 日期时间格式化字符串
    * @property {string} mode=- - 计时模式类型，可选值请参考 {@link MODE_TYPE}
@@ -113,7 +123,9 @@ class Timer {
    * 更新默认配置选项
    *
    * @since 1.0.0
+   *
    * @static
+   *
    * @param {object} options - 配置选项
    * @param {boolean} [options.debug] - 调试模式
    * @param {string} [options.format] - 日期时间格式化字符串
@@ -172,6 +184,7 @@ class Timer {
    * 日志打印器，方便调试
    *
    * @since 1.0.0
+   *
    * @private
    */
   _logger = undefined
@@ -180,6 +193,7 @@ class Timer {
    * 日期时间格式化实例
    *
    * @since 1.0.0
+   *
    * @private
    */
   _formatDate = undefined
@@ -188,6 +202,7 @@ class Timer {
    * 延迟计时器ID
    *
    * @since 1.0.0
+   *
    * @readonly
    */
   _timeouter = undefined
@@ -196,6 +211,7 @@ class Timer {
    * 实例配置项
    *
    * @since 1.0.0
+   *
    * @readonly
    */
   $options = undefined
@@ -204,6 +220,7 @@ class Timer {
    * 实例状态，可能处于以下状态：prepare=准备创段、processing=进行中、finished=已完成、stoped=暂停中
    *
    * @since 1.0.0
+   *
    * @readonly
    */
   $status = undefined
@@ -212,6 +229,7 @@ class Timer {
    * 当前地区的偏移时区时间戳
    *
    * @since 1.0.0
+   *
    * @readonly
    */
   $timeZoneTimeStamp = new Date().getTimezoneOffset() * 1000 * 60
@@ -219,6 +237,7 @@ class Timer {
    * 剩余计时时间戳
    *
    * @since 1.0.0
+   *
    * @readonly
    */
   $remainTimeStamp = undefined
@@ -226,6 +245,7 @@ class Timer {
    * 已经过的时间戳
    *
    * @since 1.0.0
+   *
    * @readonly
    */
   $throughTimeStamp = undefined
@@ -234,6 +254,7 @@ class Timer {
    * 开始计时时间戳
    *
    * @since 1.0.0
+   *
    * @readonly
    */
   $startTimeStamp = undefined
@@ -242,6 +263,7 @@ class Timer {
    * 暂停计时时间戳
    *
    * @since 1.0.0
+   *
    * @readonly
    */
   $stopTimeStamp = undefined
@@ -250,6 +272,7 @@ class Timer {
    * 计时器开始计时起 => 计时器完成时的一轮周期计时时间戳
    *
    * @since 1.0.0
+   *
    * @readonly
    */
   $endTimeStamp = undefined
@@ -257,6 +280,7 @@ class Timer {
    * 当前时间的时间戳，用于修正计时器在空间维度中出现异常流逝的时间戳
    *
    * @since 1.0.0
+   *
    * @readonly
    */
   $currentTimeStamp = undefined
@@ -265,16 +289,32 @@ class Timer {
    * 计时器每次记录的妙表功能
    *
    * @since 1.0.0
+   *
    * @readonly
    */
   $stopwatch = []
 
   /**
+   * 获取实例的调试名称
+   *
+   * @since 1.0.0
+   *
+   * @getter
+   *
+   * @returns {string}
+   */
+  get $name() {
+    return this._logger.$name
+  }
+
+  /**
    * 获取实例的调试配置项
    *
    * @since 1.0.0
+   *
    * @getter
-   * @returns {string}
+   *
+   * @returns {boolean}
    */
   get $debug() {
     return this._logger.$debug
@@ -284,9 +324,10 @@ class Timer {
    * 获取实例的计时时间戳配置项
    *
    * @since 1.0.0
+   *
    * @getter
-   * @readonly
-   * @returns {string}
+   *
+   * @returns {number}
    */
   get $timeStamp() {
     return this.$options.timeStamp
@@ -296,8 +337,9 @@ class Timer {
    * 获取实例的日期时间格式化配置项
    *
    * @since 1.0.0
+   *
    * @getter
-   * @readonly
+   *
    * @returns {string}
    */
   get $format() {
@@ -308,8 +350,9 @@ class Timer {
    * 获取实例的计时模式配置项
    *
    * @since 1.0.0
+   *
    * @getter
-   * @readonly
+   *
    * @returns {string}
    */
   get $mode() {
@@ -320,8 +363,9 @@ class Timer {
    * 获取实例的日期时间字符串值
    *
    * @since 1.0.0
+   *
    * @getter
-   * @readonly
+   *
    * @returns {string}
    */
   get $datetime() {
@@ -332,8 +376,9 @@ class Timer {
    * 获取实例的日期时间数据片断
    *
    * @since 1.1.0
+   *
    * @getter
-   * @readonly
+   *
    * @property {string} [year] - 剩余年数
    * @property {string} [month] - 剩余月数
    * @property {string} [date] - 剩余日数
@@ -352,7 +397,9 @@ class Timer {
    * 若在未结束前中途造成暂停，会触发rejectd状态
    *
    * @since 1.0.0
+   *
    * @param {function} callback - 每秒执行的回调函数
+   *
    * @returns {Promise}
    */
   start(callback) {
@@ -426,6 +473,7 @@ class Timer {
    * 秒表：记录触发该操作的计时结果，保存结果的值将根据当前实例的format格式化
    *
    * @since 1.1.0
+   *
    * @returns {Timer}
    */
   record() {
@@ -437,6 +485,7 @@ class Timer {
    * 计时器停止
    *
    * @since 1.0.0
+   *
    * @returns {Timer}
    */
   stop() {
@@ -453,6 +502,7 @@ class Timer {
    * 计时器复位
    *
    * @since 1.0.0
+   *
    * @returns {Timer}
    */
   reset() {
@@ -490,7 +540,7 @@ export default Timer</code></pre>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Nov 10 2017 14:01:13 GMT+0800 (CST) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Dec 15 2017 17:33:34 GMT+0800 (CST) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
