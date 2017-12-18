@@ -24,16 +24,18 @@ const DATETIME_PATTERN = {
 /**
  * 计时器格式化类
  *
+ * @ignore
  * @class
  */
 class FormatDate {
   /**
    * 默认配置选项
    *
-   * @memberOf FormatDate
    * @since 1.0.0
-   * @readonly
+   *
+   * @memberOf FormatDate
    * @static
+   * @readonly
    */
   static options = {
     format: 'mm:ss'

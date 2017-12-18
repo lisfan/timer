@@ -38,13 +38,9 @@ const _actions = {
    * @returns {FormatDate}
    */
   formatDate(self) {
-    let date
-
-    if (self.$mode === '+') {
-      date = (self.$options.timeStamp - self.$remainTimeStamp) + self.$timeZoneTimeStamp
-    } else {
-      date = self.$remainTimeStamp + self.$timeZoneTimeStamp
-    }
+    const date = self.$mode === '+'
+      ? (self.$options.timeStamp - self.$remainTimeStamp) + self.$timeZoneTimeStamp
+      : self.$remainTimeStamp + self.$timeZoneTimeStamp
 
     return new FormatDate({
       date,
@@ -93,10 +89,8 @@ class Timer {
    * @param {string} [options.mode] - 计时模式类型，可选值请参考 {@link MODE_TYPE}
    */
   static config(options) {
-    const ctor = this
-
-    ctor.options = {
-      ...ctor.options,
+    Timer.options = {
+      ...Timer.options,
       ...options
     }
   }
@@ -112,10 +106,8 @@ class Timer {
    * @param {string} [options.mode] - 计时模式类型，可选值请参考 {@link MODE_TYPE}
    */
   constructor(options) {
-    const ctor = this.constructor
-
     this.$options = {
-      ...ctor.options,
+      ...Timer.options,
       ...options
     }
 
@@ -125,7 +117,7 @@ class Timer {
     })
 
     if (!this.$options.timeStamp) {
-      this._logger.error('require timeStamp option param, please check!')
+      return this._logger.error('require timeStamp option param, please check!')
     }
 
     this.$status = 'prepare'
@@ -406,9 +398,7 @@ class Timer {
         this._formatDate = _actions.formatDate(this)
 
         // 优先执行回调
-        if (validation.isFunction(callback)) {
-          callback.call(this)
-        }
+        validation.isFunction(callback) && callback.call(this)
 
         /* eslint-enable max-len*/
         if (this._timeouter && this.$currentTimeStamp >= this.$endTimeStamp) {
