@@ -43,6 +43,8 @@ const _actions = {
       : self.$remainTimeStamp + self.$timeZoneTimeStamp
 
     return new FormatDate({
+      name: self._logger.$name,
+      debug: self._logger.$debug,
       date,
       format: self.$format
     })
@@ -65,12 +67,14 @@ class Timer {
    * @readonly
    * @memberOf Timer
    *
+   * @property {string} name='timer' - 日志器命名空间
    * @property {boolean} debug=false - 调试模式
    * @property {string} format='mm:ss' - 日期时间格式化字符串
    * @property {string} mode=- - 计时模式类型，可选值请参考 {@link MODE_TYPE}
    */
   static options = {
     // timeStamp: undefined, // 必须
+    name: 'timer',
     debug: false, // 开启调试模式
     format: 'mm:ss', // 日期时间格式化字符串
     mode: '-', // 计时模式
@@ -112,7 +116,7 @@ class Timer {
     }
 
     this._logger = new Logger({
-      name: 'timer',
+      name: this.$options.name,
       debug: this.$options.debug
     })
 
