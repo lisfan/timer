@@ -87,9 +87,10 @@ class Timer {
    * @since 1.0.0
    *
    * @param {object} options - 配置选项
-   * @param {boolean} [options.debug] - 调试模式
-   * @param {string} [options.format] - 日期时间格式化字符串
-   * @param {string} [options.mode] - 计时模式类型，可选值请参考 {@link MODE_TYPE}
+   * @param {boolean} [options.name='timer'] - 日志器命名空间
+   * @param {boolean} [options.debug=false] - 调试模式
+   * @param {string} [options.format='mm:ss'] - 日期时间格式化字符串
+   * @param {string} [options.mode='-'] - 计时模式类型，可选值请参考 {@link MODE_TYPE}
    */
   static config(options) {
     Timer.options = {
@@ -103,10 +104,11 @@ class Timer {
    *
    * @param {object} options - 配置选项
    * @param {number} options.timeStamp - 剩余计时时间戳，毫秒单位，且毫秒数必须为1000单位，不能是1234这样，超出时会自动向下取整
-   * @param {boolean} [options.debug] - 调试模式
-   * @param {string} [options.format] -
+   * @param {boolean} [options.name='timer'] - 日志器命名空间
+   * @param {boolean} [options.debug=false] - 调试模式
+   * @param {string} [options.format='mm:ss'] -
    *   日期时间格式化字符串，支持使用字母占位符匹配对应的年月日时分秒：Y=年、M=月、D=日、h=时、m=分、s=秒、ms=毫秒，年和毫秒字母占位符可以使用1-4个，其他占位符可以使用1-2个，如果实际结果值长度大于占位符的长度，则显示值实际结果值，如果小于，则前置用0补足
-   * @param {string} [options.mode] - 计时模式类型，可选值请参考 {@link MODE_TYPE}
+   * @param {string} [options.mode='-'] - 计时模式类型，可选值请参考 {@link MODE_TYPE}
    */
   constructor(options) {
     this.$options = {

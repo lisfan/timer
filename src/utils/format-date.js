@@ -22,8 +22,8 @@ const DATETIME_PATTERN = {
 /**
  * 计时器格式化类
  *
- * @ignore
  * @class
+ * @ignore
  */
 class FormatDate {
   /**
@@ -31,13 +31,21 @@ class FormatDate {
    *
    * @since 1.0.0
    *
-   * @memberOf FormatDate
    * @static
    * @readonly
+   * @memberOf FormatDate
+   *
+   * @type {object}
+   * @property {boolean} name='format-date' - 日志器命名空间
+   * @property {boolean} debug=false - 调试模式
+   * @property {number|string|Date} date - 可以被格式为时间的值
+   * @property {string} format='mm:ss' -
+   *   日期时间格式化字符串，支持使用字母占位符匹配对应的年月日时分秒：Y=年、M=月、D=日、h=时、m=分、s=秒、ms=毫秒，年和毫秒字母占位符可以使用1-4个，其他占位符可以使用1-2个，如果实际结果值长度大于占位符的长度，则显示值实际结果值，如果小于，则前置用0补足
    */
   static options = {
     name: 'format-date',
     debug: false,
+    // date: Date.now(), //
     format: 'mm:ss'
   }
 
@@ -45,6 +53,8 @@ class FormatDate {
    * 构造函数
    *
    * @param {object} options - 配置对象
+   * @param {boolean} [options.name='format-date'] - 日志器命名空间
+   * @param {boolean} [options.debug=false] - 调试模式
    * @param {number|string|Date} options.date - 可以被格式为时间的值
    * @param {string} [options.format='mm:ss'] -
    *   日期时间格式化字符串，支持使用字母占位符匹配对应的年月日时分秒：Y=年、M=月、D=日、h=时、m=分、s=秒、ms=毫秒，年和毫秒字母占位符可以使用1-4个，其他占位符可以使用1-2个，如果实际结果值长度大于占位符的长度，则显示值实际结果值，如果小于，则前置用0补足
@@ -148,6 +158,8 @@ class FormatDate {
    * @since 1.0.0
    *
    * @readonly
+   *
+   * @type {object}
    */
   $options = undefined
 
@@ -157,8 +169,9 @@ class FormatDate {
    * @since 1.0.0
    *
    * @getter
+   * @readonly
    *
-   * @returns {object}
+   * @type {object}
    */
   get $data() {
     return FormatDate.getFields(this.$date, this.$format)
@@ -170,8 +183,9 @@ class FormatDate {
    * @since 1.0.0
    *
    * @getter
+   * @readonly
    *
-   * @returns {object}
+   * @type {object}
    */
   get $date() {
     return this.$options.date
@@ -183,8 +197,9 @@ class FormatDate {
    * @since 1.0.0
    *
    * @getter
+   * @readonly
    *
-   * @returns {string}
+   * @type {string}
    */
   get $format() {
     return this.$options.format
