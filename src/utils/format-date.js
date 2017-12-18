@@ -101,11 +101,9 @@ class FormatDate {
         const patternLen = matched[0].length
         // 如果指定长度小于要值长度，则显示值长度
         // 如果不足，前置用0补足
-        if (patternLen >= valueLen) {
-          formatFields[dateStr] = '0'.repeat(patternLen - valueLen) + value
-        } else {
-          formatFields[dateStr] = value
-        }
+        formatFields[dateStr] = patternLen >= valueLen
+          ? '0'.repeat(patternLen - valueLen) + value
+          : value
       }
     })
 
@@ -123,13 +121,9 @@ class FormatDate {
    * @returns {string}
    */
   static toString(dateOrFields, format = FormatDate.options.format) {
-    let data
-
-    if (validation.isPlainObject(dateOrFields)) {
-      data = dateOrFields
-    } else {
-      data = FormatDate.getFields(dateOrFields, format)
-    }
+    let data = validation.isPlainObject(dateOrFields)
+      ? dateOrFields
+      : FormatDate.getFields(dateOrFields, format)
 
     Object.entries(DATETIME_PATTERN).forEach(([pattern, dateStr]) => {
       const regexp = new RegExp((pattern + '+'))
