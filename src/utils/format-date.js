@@ -65,9 +65,10 @@ class FormatDate {
    * 获取日期时间格式化后的日期时间片断数据
    *
    * @since 1.0.0
-   * @function
+   *
    * @param {number|string|Date} date - 可以被格式为时间的值
    * @param {string} [format='mm:ss'] - 日期时间格式化字符串
+   *
    * @returns {object}
    */
   static getFields(date, format = FormatDate.options.format) {
@@ -115,8 +116,10 @@ class FormatDate {
    * 获取日期时间格式化后的字符串
    *
    * @since 1.0.0
+   *
    * @param {number|string|Date|object} dateOrFields - 可以被格式为时间的值，或者已经被提前的日期时间值片断
    * @param {string} [format='mm:ss'] - 日期时间格式化字符串
+   *
    * @returns {string}
    */
   static toString(dateOrFields, format = FormatDate.options.format) {
@@ -149,9 +152,8 @@ class FormatDate {
    * 实例的配置项
    *
    * @since 1.0.0
+   *
    * @readonly
-   * @property {number|string|Date} date - 可以被格式为时间的值
-   * @property {string} format='mm:ss' - 日期时间格式化字符串
    */
   $options = undefined
 
@@ -159,8 +161,9 @@ class FormatDate {
    * 获取实例的日期时间片断数据
    *
    * @since 1.0.0
+   *
    * @getter
-   * @readonly
+   *
    * @returns {object}
    */
   get $data() {
@@ -171,8 +174,9 @@ class FormatDate {
    * 获取实例的日期时间配置项
    *
    * @since 1.0.0
+   *
    * @getter
-   * @readonly
+   *
    * @returns {object}
    */
   get $date() {
@@ -183,8 +187,9 @@ class FormatDate {
    * 获取实例的日期时间格式化字符串配置项
    *
    * @since 1.0.0
+   *
    * @getter
-   * @readonly
+   *
    * @returns {string}
    */
   get $format() {
@@ -195,6 +200,7 @@ class FormatDate {
    * 日期时间数据转换成字符串
    *
    * @since 1.0.0
+   *
    * @returns {string}
    */
   toString() {
