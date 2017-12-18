@@ -67,6 +67,7 @@ class Timer {
    * @readonly
    * @memberOf Timer
    *
+   * @type {object}
    * @property {string} name='timer' - 日志器命名空间
    * @property {boolean} debug=false - 调试模式
    * @property {string} format='mm:ss' - 日期时间格式化字符串
@@ -84,8 +85,6 @@ class Timer {
    * 更新默认配置选项
    *
    * @since 1.0.0
-   *
-   * @static
    *
    * @param {object} options - 配置选项
    * @param {boolean} [options.debug] - 调试模式
@@ -160,7 +159,7 @@ class Timer {
    *
    * @since 1.0.0
    *
-   * @readonly
+   * @private
    */
   _timeouter = undefined
 
@@ -170,6 +169,8 @@ class Timer {
    * @since 1.0.0
    *
    * @readonly
+   *
+   * @type {object}
    */
   $options = undefined
 
@@ -179,6 +180,8 @@ class Timer {
    * @since 1.0.0
    *
    * @readonly
+   *
+   * @type {string}
    */
   $status = undefined
 
@@ -188,6 +191,8 @@ class Timer {
    * @since 1.0.0
    *
    * @readonly
+   *
+   * @type {number}
    */
   $timeZoneTimeStamp = new Date().getTimezoneOffset() * 1000 * 60
   /**
@@ -196,6 +201,8 @@ class Timer {
    * @since 1.0.0
    *
    * @readonly
+   *
+   * @type {number}
    */
   $remainTimeStamp = undefined
   /**
@@ -204,6 +211,8 @@ class Timer {
    * @since 1.0.0
    *
    * @readonly
+   *
+   * @type {number}
    */
   $throughTimeStamp = undefined
 
@@ -213,6 +222,8 @@ class Timer {
    * @since 1.0.0
    *
    * @readonly
+   *
+   * @type {number}
    */
   $startTimeStamp = undefined
 
@@ -222,6 +233,8 @@ class Timer {
    * @since 1.0.0
    *
    * @readonly
+   *
+   * @type {number}
    */
   $stopTimeStamp = undefined
 
@@ -231,6 +244,8 @@ class Timer {
    * @since 1.0.0
    *
    * @readonly
+   *
+   * @type {number}
    */
   $endTimeStamp = undefined
   /**
@@ -239,6 +254,8 @@ class Timer {
    * @since 1.0.0
    *
    * @readonly
+   *
+   * @type {number}
    */
   $currentTimeStamp = undefined
 
@@ -248,34 +265,10 @@ class Timer {
    * @since 1.0.0
    *
    * @readonly
+   *
+   * @type {string[]}
    */
   $stopwatch = []
-
-  /**
-   * 获取实例的调试名称
-   *
-   * @since 1.0.0
-   *
-   * @getter
-   *
-   * @returns {string}
-   */
-  get $name() {
-    return this._logger.$name
-  }
-
-  /**
-   * 获取实例的调试配置项
-   *
-   * @since 1.0.0
-   *
-   * @getter
-   *
-   * @returns {boolean}
-   */
-  get $debug() {
-    return this._logger.$debug
-  }
 
   /**
    * 获取实例的计时时间戳配置项
@@ -283,8 +276,9 @@ class Timer {
    * @since 1.0.0
    *
    * @getter
+   * @readonly
    *
-   * @returns {number}
+   * @type {number}
    */
   get $timeStamp() {
     return this.$options.timeStamp
@@ -296,8 +290,9 @@ class Timer {
    * @since 1.0.0
    *
    * @getter
+   * @readonly
    *
-   * @returns {string}
+   * @type {string}
    */
   get $format() {
     return this.$options.format
@@ -309,8 +304,9 @@ class Timer {
    * @since 1.0.0
    *
    * @getter
+   * @readonly
    *
-   * @returns {string}
+   * @type {string}
    */
   get $mode() {
     return MODE_TYPE[this.$options.mode]
@@ -322,8 +318,9 @@ class Timer {
    * @since 1.0.0
    *
    * @getter
+   * @readonly
    *
-   * @returns {string}
+   * @type {string}
    */
   get $datetime() {
     return this._formatDate.toString()
@@ -335,7 +332,9 @@ class Timer {
    * @since 1.1.0
    *
    * @getter
+   * @readonly
    *
+   * @type {object}
    * @property {string} [year] - 剩余年数
    * @property {string} [month] - 剩余月数
    * @property {string} [date] - 剩余日数
@@ -354,6 +353,8 @@ class Timer {
    * 若在未结束前中途造成暂停，会触发rejectd状态
    *
    * @since 1.0.0
+   *
+   * @async
    *
    * @param {function} callback - 每秒执行的回调函数
    *
