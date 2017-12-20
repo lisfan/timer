@@ -1,8 +1,5 @@
 /**
  * @file 计时器日期时间格式化工具
- * @author lisfan <goolisfan@gmail.com>
- * @version 1.0.0
- * @licence MIT
  */
 
 import validation from '@~lisfan/validation'

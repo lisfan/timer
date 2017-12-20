@@ -1,8 +1,5 @@
 /**
  * @file 计时器
- * @author lisfan <goolisfan@gmail.com>
- * @version 1.1.2
- * @licence MIT
  */
 
 import validation from '@~lisfan/validation'
