@@ -69,7 +69,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line54">line 54</a>
+        <a href="timer.js.html">timer.js</a>, <a href="timer.js.html#line60">line 60</a>
     </li></ul></dd>
     
 
@@ -163,7 +163,7 @@
 
             
 
-            <td class="description last"><p>配置选项</p>
+            <td class="description last"><p>其他配置选项见<a href="Timer.html#.options">Timer.options</a></p>
                 <h6>Properties</h6>
                 
 
@@ -176,8 +176,6 @@
 
         <th>Type</th>
 
-        
-        <th>Attributes</th>
         
 
         
@@ -204,117 +202,10 @@
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
 
             <td class="description last"><p>剩余计时时间戳，毫秒单位，且毫秒数必须为1000单位，不能是1234这样，超出时会自动向下取整</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>debug</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>调试模式</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>format</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>日期时间格式化字符串，支持使用字母占位符匹配对应的年月日时分秒：Y=年、M=月、D=日、h=时、m=分、s=秒、ms=毫秒，年和毫秒字母占位符可以使用1-4个，其他占位符可以使用1-2个，如果实际结果值长度大于占位符的长度，则显示值实际结果值，如果小于，则前置用0补足</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>mode</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>计时模式类型，可选值请参考 <a href="global.html#MODE_TYPE">MODE_TYPE</a></p></td>
         </tr>
 
     
@@ -361,7 +252,7 @@
 
         
             
-<h4 class="name" id=".options"><span class="type-signature">(static, readonly) </span>options<span class="type-signature"></span></h4>
+<h4 class="name" id=".options"><span class="type-signature">(static, readonly) </span>options<span class="type-signature"> :object</span></h4>
 
 
 
@@ -372,7 +263,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line66">line 66</a>
+        <a href="timer.js.html">timer.js</a>, <a href="timer.js.html#line77">line 77</a>
     </li></ul></dd>
     
 
@@ -440,6 +331,35 @@
 
         <tr>
             
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    <code>'timer'</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>日志器命名空间</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
                 <td class="name"><code>debug</code></td>
             
 
@@ -491,7 +411,7 @@
                 </td>
             
 
-            <td class="description last"><p>日期时间格式化字符串</p></td>
+            <td class="description last"><p>日期时间格式化字符串，支持使用字母占位符匹配对应的年月日时分秒：Y=年、M=月、D=日、h=时、m=分、s=秒、ms=毫秒，年和毫秒字母占位符可以使用1-4个，其他占位符可以使用1-2个，如果实际结果值长度大于占位符的长度，则显示值实际结果值，如果小于，则前置用0补足</p></td>
         </tr>
 
     
@@ -515,7 +435,7 @@
             
                 <td class="default">
                 
-                    <code>-</code>
+                    <code>'-'</code>
                 
                 </td>
             
@@ -538,6 +458,16 @@
 
 
 
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
 
 
 
@@ -545,7 +475,7 @@
 
         
             
-<h4 class="name" id="_timeouter"><span class="type-signature">(readonly) </span>_timeouter<span class="type-signature"></span></h4>
+<h4 class="name" id="$options"><span class="type-signature">(readonly) </span>$options<span class="type-signature"> :object</span></h4>
 
 
 
@@ -556,7 +486,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line154">line 154</a>
+        <a href="timer.js.html">timer.js</a>, <a href="timer.js.html#line177">line 177</a>
     </li></ul></dd>
     
 
@@ -599,10 +529,20 @@
 
 
 <div class="description">
-    <p>延迟计时器ID</p>
+    <p>实例初始配置项</p>
 </div>
 
 
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">object</span>
+
+
+        </li>
+    </ul>
 
 
 
@@ -611,7 +551,7 @@
 
         
             
-<h4 class="name" id="$options"><span class="type-signature">(readonly) </span>$options<span class="type-signature"></span></h4>
+<h4 class="name" id="$status"><span class="type-signature">(readonly) </span>$status<span class="type-signature"> :string</span></h4>
 
 
 
@@ -622,73 +562,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line162">line 162</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-    <dt class="tag-since">Since:</dt>
-    <dd class="tag-since"><ul class="dummy"><li>1.0.0</li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    <p>实例配置项</p>
-</div>
-
-
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="$status"><span class="type-signature">(readonly) </span>$status<span class="type-signature"></span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line170">line 170</a>
+        <a href="timer.js.html">timer.js</a>, <a href="timer.js.html#line188">line 188</a>
     </li></ul></dd>
     
 
@@ -736,6 +610,16 @@
 
 
 
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
 
 
 
@@ -743,7 +627,7 @@
 
         
             
-<h4 class="name" id="$timeZoneTimeStamp"><span class="type-signature">(readonly) </span>$timeZoneTimeStamp<span class="type-signature"></span></h4>
+<h4 class="name" id="$timeZoneTimeStamp"><span class="type-signature">(readonly) </span>$timeZoneTimeStamp<span class="type-signature"> :number</span></h4>
 
 
 
@@ -754,7 +638,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line178">line 178</a>
+        <a href="timer.js.html">timer.js</a>, <a href="timer.js.html#line199">line 199</a>
     </li></ul></dd>
     
 
@@ -802,6 +686,16 @@
 
 
 
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">number</span>
+
+
+        </li>
+    </ul>
+
 
 
 
@@ -809,7 +703,7 @@
 
         
             
-<h4 class="name" id="$remainTimeStamp"><span class="type-signature">(readonly) </span>$remainTimeStamp<span class="type-signature"></span></h4>
+<h4 class="name" id="$remainTimeStamp"><span class="type-signature">(readonly) </span>$remainTimeStamp<span class="type-signature"> :number</span></h4>
 
 
 
@@ -820,7 +714,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line185">line 185</a>
+        <a href="timer.js.html">timer.js</a>, <a href="timer.js.html#line209">line 209</a>
     </li></ul></dd>
     
 
@@ -868,6 +762,16 @@
 
 
 
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">number</span>
+
+
+        </li>
+    </ul>
+
 
 
 
@@ -875,7 +779,7 @@
 
         
             
-<h4 class="name" id="$throughTimeStamp"><span class="type-signature">(readonly) </span>$throughTimeStamp<span class="type-signature"></span></h4>
+<h4 class="name" id="$throughTimeStamp"><span class="type-signature">(readonly) </span>$throughTimeStamp<span class="type-signature"> :number</span></h4>
 
 
 
@@ -886,7 +790,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line192">line 192</a>
+        <a href="timer.js.html">timer.js</a>, <a href="timer.js.html#line219">line 219</a>
     </li></ul></dd>
     
 
@@ -934,6 +838,16 @@
 
 
 
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">number</span>
+
+
+        </li>
+    </ul>
+
 
 
 
@@ -941,7 +855,7 @@
 
         
             
-<h4 class="name" id="$startTimeStamp"><span class="type-signature">(readonly) </span>$startTimeStamp<span class="type-signature"></span></h4>
+<h4 class="name" id="$startTimeStamp"><span class="type-signature">(readonly) </span>$startTimeStamp<span class="type-signature"> :number</span></h4>
 
 
 
@@ -952,7 +866,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line200">line 200</a>
+        <a href="timer.js.html">timer.js</a>, <a href="timer.js.html#line230">line 230</a>
     </li></ul></dd>
     
 
@@ -1000,6 +914,16 @@
 
 
 
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">number</span>
+
+
+        </li>
+    </ul>
+
 
 
 
@@ -1007,7 +931,7 @@
 
         
             
-<h4 class="name" id="$stopTimeStamp"><span class="type-signature">(readonly) </span>$stopTimeStamp<span class="type-signature"></span></h4>
+<h4 class="name" id="$stopTimeStamp"><span class="type-signature">(readonly) </span>$stopTimeStamp<span class="type-signature"> :number</span></h4>
 
 
 
@@ -1018,7 +942,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line208">line 208</a>
+        <a href="timer.js.html">timer.js</a>, <a href="timer.js.html#line241">line 241</a>
     </li></ul></dd>
     
 
@@ -1066,6 +990,16 @@
 
 
 
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">number</span>
+
+
+        </li>
+    </ul>
+
 
 
 
@@ -1073,7 +1007,7 @@
 
         
             
-<h4 class="name" id="$endTimeStamp"><span class="type-signature">(readonly) </span>$endTimeStamp<span class="type-signature"></span></h4>
+<h4 class="name" id="$endTimeStamp"><span class="type-signature">(readonly) </span>$endTimeStamp<span class="type-signature"> :number</span></h4>
 
 
 
@@ -1084,7 +1018,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line216">line 216</a>
+        <a href="timer.js.html">timer.js</a>, <a href="timer.js.html#line252">line 252</a>
     </li></ul></dd>
     
 
@@ -1132,6 +1066,16 @@
 
 
 
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">number</span>
+
+
+        </li>
+    </ul>
+
 
 
 
@@ -1139,7 +1083,7 @@
 
         
             
-<h4 class="name" id="$currentTimeStamp"><span class="type-signature">(readonly) </span>$currentTimeStamp<span class="type-signature"></span></h4>
+<h4 class="name" id="$currentTimeStamp"><span class="type-signature">(readonly) </span>$currentTimeStamp<span class="type-signature"> :number</span></h4>
 
 
 
@@ -1150,7 +1094,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line223">line 223</a>
+        <a href="timer.js.html">timer.js</a>, <a href="timer.js.html#line262">line 262</a>
     </li></ul></dd>
     
 
@@ -1198,6 +1142,16 @@
 
 
 
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">number</span>
+
+
+        </li>
+    </ul>
+
 
 
 
@@ -1205,7 +1159,7 @@
 
         
             
-<h4 class="name" id="$stopwatch"><span class="type-signature">(readonly) </span>$stopwatch<span class="type-signature"></span></h4>
+<h4 class="name" id="$stopwatch"><span class="type-signature">(readonly) </span>$stopwatch<span class="type-signature"> :Array.&lt;string></span></h4>
 
 
 
@@ -1216,7 +1170,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line231">line 231</a>
+        <a href="timer.js.html">timer.js</a>, <a href="timer.js.html#line273">line 273</a>
     </li></ul></dd>
     
 
@@ -1264,6 +1218,16 @@
 
 
 
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Array.&lt;string></span>
+
+
+        </li>
+    </ul>
+
 
 
 
@@ -1271,7 +1235,7 @@
 
         
             
-<h4 class="name" id="$debug"><span class="type-signature"></span>$debug<span class="type-signature"></span></h4>
+<h4 class="name" id="$timeStamp"><span class="type-signature">(readonly) </span>$timeStamp<span class="type-signature"> :number</span></h4>
 
 
 
@@ -1282,73 +1246,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line240">line 240</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-    <dt class="tag-since">Since:</dt>
-    <dd class="tag-since"><ul class="dummy"><li>1.0.0</li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    <p>获取实例的调试配置项</p>
-</div>
-
-
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="$timeStamp"><span class="type-signature">(readonly) </span>$timeStamp<span class="type-signature"></span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line252">line 252</a>
+        <a href="timer.js.html">timer.js</a>, <a href="timer.js.html#line285">line 285</a>
     </li></ul></dd>
     
 
@@ -1396,6 +1294,16 @@
 
 
 
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">number</span>
+
+
+        </li>
+    </ul>
+
 
 
 
@@ -1403,7 +1311,7 @@
 
         
             
-<h4 class="name" id="$format"><span class="type-signature">(readonly) </span>$format<span class="type-signature"></span></h4>
+<h4 class="name" id="$format"><span class="type-signature">(readonly) </span>$format<span class="type-signature"> :string</span></h4>
 
 
 
@@ -1414,7 +1322,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line264">line 264</a>
+        <a href="timer.js.html">timer.js</a>, <a href="timer.js.html#line299">line 299</a>
     </li></ul></dd>
     
 
@@ -1462,6 +1370,16 @@
 
 
 
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
 
 
 
@@ -1469,7 +1387,7 @@
 
         
             
-<h4 class="name" id="$mode"><span class="type-signature">(readonly) </span>$mode<span class="type-signature"></span></h4>
+<h4 class="name" id="$mode"><span class="type-signature">(readonly) </span>$mode<span class="type-signature"> :string</span></h4>
 
 
 
@@ -1480,7 +1398,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line276">line 276</a>
+        <a href="timer.js.html">timer.js</a>, <a href="timer.js.html#line313">line 313</a>
     </li></ul></dd>
     
 
@@ -1528,6 +1446,16 @@
 
 
 
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
 
 
 
@@ -1535,7 +1463,7 @@
 
         
             
-<h4 class="name" id="$datetime"><span class="type-signature">(readonly) </span>$datetime<span class="type-signature"></span></h4>
+<h4 class="name" id="$datetime"><span class="type-signature">(readonly) </span>$datetime<span class="type-signature"> :string</span></h4>
 
 
 
@@ -1546,7 +1474,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line288">line 288</a>
+        <a href="timer.js.html">timer.js</a>, <a href="timer.js.html#line327">line 327</a>
     </li></ul></dd>
     
 
@@ -1594,6 +1522,16 @@
 
 
 
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
 
 
 
@@ -1601,7 +1539,7 @@
 
         
             
-<h4 class="name" id="$data"><span class="type-signature">(readonly) </span>$data<span class="type-signature"></span></h4>
+<h4 class="name" id="$data"><span class="type-signature">(readonly) </span>$data<span class="type-signature"> :object</span></h4>
 
 
 
@@ -1612,7 +1550,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line306">line 306</a>
+        <a href="timer.js.html">timer.js</a>, <a href="timer.js.html#line348">line 348</a>
     </li></ul></dd>
     
 
@@ -1908,6 +1846,16 @@
 
 
 
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
 
 
 
@@ -1924,7 +1872,7 @@
 
     
 
-    <h4 class="name" id=".config"><span class="type-signature">(static) </span>config<span class="signature">(options)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".config"><span class="type-signature">(static) </span>config<span class="signature">(options)</span><span class="type-signature"> &rarr; {<a href="Timer.html">Timer</a>}</span></h4>
 
     
 
@@ -1936,7 +1884,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line83">line 83</a>
+        <a href="timer.js.html">timer.js</a>, <a href="timer.js.html#line96">line 96</a>
     </li></ul></dd>
     
 
@@ -1969,6 +1917,13 @@
 
     
 
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="Timer.html#.options">Timer.options</a></li>
+        </ul>
+    </dd>
     
 
     
@@ -2033,134 +1988,7 @@
 
             
 
-            <td class="description last"><p>配置选项</p>
-                <h6>Properties</h6>
-                
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>debug</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>调试模式</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>format</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>日期时间格式化字符串</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>mode</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>计时模式类型，可选值请参考 <a href="global.html#MODE_TYPE">MODE_TYPE</a></p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
+            <td class="description last"><p>其他配置选项见<a href="Timer.html#.options">Timer.options</a></p></td>
         </tr>
 
     
@@ -2180,6 +2008,24 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Timer.html">Timer</a></span>
+
+
+    </dd>
+</dl>
+
+    
 
 
         
@@ -2187,7 +2033,7 @@
 
     
 
-    <h4 class="name" id="start"><span class="type-signature"></span>start<span class="signature">(callback)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    <h4 class="name" id="start"><span class="type-signature">(async) </span>start<span class="signature">(callback)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
 
     
 
@@ -2199,7 +2045,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line319">line 319</a>
+        <a href="timer.js.html">timer.js</a>, <a href="timer.js.html#line365">line 365</a>
     </li></ul></dd>
     
 
@@ -2353,7 +2199,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line392">line 392</a>
+        <a href="timer.js.html">timer.js</a>, <a href="timer.js.html#line437">line 437</a>
     </li></ul></dd>
     
 
@@ -2458,7 +2304,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line403">line 403</a>
+        <a href="timer.js.html">timer.js</a>, <a href="timer.js.html#line449">line 449</a>
     </li></ul></dd>
     
 
@@ -2563,7 +2409,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line419">line 419</a>
+        <a href="timer.js.html">timer.js</a>, <a href="timer.js.html#line466">line 466</a>
     </li></ul></dd>
     
 
@@ -2669,7 +2515,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Nov 09 2017 11:26:12 GMT+0800 (CST) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Dec 20 2017 09:49:21 GMT+0800 (CST) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

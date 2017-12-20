@@ -1,53 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>index.js - Documentation</title>
-
-    <script src="scripts/prettify/prettify.js"></script>
-    <script src="scripts/prettify/lang-css.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
-</head>
-<body>
-
-<input type="checkbox" id="nav-trigger" class="nav-trigger" />
-<label for="nav-trigger" class="navicon-button x">
-  <div class="navicon"></div>
-</label>
-
-<label for="nav-trigger" class="overlay"></label>
-
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Timer.html">Timer</a><ul class='methods'><li data-type='method'><a href="Timer.html#.config">config</a></li><li data-type='method'><a href="Timer.html#start">start</a></li><li data-type='method'><a href="Timer.html#record">record</a></li><li data-type='method'><a href="Timer.html#stop">stop</a></li><li data-type='method'><a href="Timer.html#reset">reset</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#MODE_TYPE">MODE_TYPE</a></li></ul>
-</nav>
-
-<div id="main">
-    
-    <h1 class="page-title">index.js</h1>
-    
-
-    
-
-
-
-    
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
+/**
  * @file 计时器
- * @author lisfan &lt;goolisfan@gmail.com>
- * @version 1.1.1
+ * @author lisfan <goolisfan@gmail.com>
+ * @version 1.1.2
  * @licence MIT
  */
 
 import validation from '@~lisfan/validation'
 import Logger from '@~lisfan/logger'
 
-import FormatDate from './utils/format-date'
+import FormatDate from './format-date'
 import MODE_TYPE from './enums/mode-type'
 
 /**
@@ -57,7 +18,11 @@ import MODE_TYPE from './enums/mode-type'
 const _actions = {
   /**
    * 返回向下取整后的时间戳
+   *
+   * @since 1.1.0
+   *
    * @param {number} [timeStamp=Date.now()] - 时间戳
+   *
    * @returns {number}
    */
   timeStamp(timeStamp = Date.now()) {
@@ -65,19 +30,21 @@ const _actions = {
   },
   /**
    * 格式化时间，返回formatDate实例
+   *
+   * @since 1.1.0
+   *
    * @param {Timer} self - timer实例
+   *
    * @returns {FormatDate}
    */
   formatDate(self) {
-    let date
-
-    if (self.$mode === '+') {
-      date = (self.$options.timeStamp - self.$remainTimeStamp) + self.$timeZoneTimeStamp
-    } else {
-      date = self.$remainTimeStamp + self.$timeZoneTimeStamp
-    }
+    const date = self.$mode === '+'
+      ? (self.$options.timeStamp - self.$remainTimeStamp) + self.$timeZoneTimeStamp
+      : self.$remainTimeStamp + self.$timeZoneTimeStamp
 
     return new FormatDate({
+      name: self._logger.$name,
+      debug: self._logger.$debug,
       date,
       format: self.$format
     })
@@ -95,15 +62,21 @@ class Timer {
    * 默认配置选项
    *
    * @since 1.0.0
+   *
    * @static
    * @readonly
    * @memberOf Timer
+   *
+   * @type {object}
+   * @property {string} name='timer' - 日志器命名空间
    * @property {boolean} debug=false - 调试模式
-   * @property {string} format='mm:ss' - 日期时间格式化字符串
-   * @property {string} mode=- - 计时模式类型，可选值请参考 {@link MODE_TYPE}
+   * @property {string} format='mm:ss' -
+   *   日期时间格式化字符串，支持使用字母占位符匹配对应的年月日时分秒：Y=年、M=月、D=日、h=时、m=分、s=秒、ms=毫秒，年和毫秒字母占位符可以使用1-4个，其他占位符可以使用1-2个，如果实际结果值长度大于占位符的长度，则显示值实际结果值，如果小于，则前置用0补足
+   * @property {string} mode='-' - 计时模式类型，可选值请参考 {@link MODE_TYPE}
    */
   static options = {
     // timeStamp: undefined, // 必须
+    name: 'timer',
     debug: false, // 开启调试模式
     format: 'mm:ss', // 日期时间格式化字符串
     mode: '-', // 计时模式
@@ -113,46 +86,43 @@ class Timer {
    * 更新默认配置选项
    *
    * @since 1.0.0
-   * @static
-   * @param {object} options - 配置选项
-   * @param {boolean} [options.debug] - 调试模式
-   * @param {string} [options.format] - 日期时间格式化字符串
-   * @param {string} [options.mode] - 计时模式类型，可选值请参考 {@link MODE_TYPE}
+   *
+   * @see Timer.options
+   *
+   * @param {object} options - 其他配置选项见{@link Timer.options}
+   *
+   * @returns {Timer}
    */
   static config(options) {
-    const ctor = this
-
-    ctor.options = {
-      ...ctor.options,
+    Timer.options = {
+      ...Timer.options,
       ...options
     }
+
+    return this
   }
 
   /**
    * 构造函数
    *
-   * @param {object} options - 配置选项
+   * @see Timer.options
+   *
+   * @param {object} options - 其他配置选项见{@link Timer.options}
    * @param {number} options.timeStamp - 剩余计时时间戳，毫秒单位，且毫秒数必须为1000单位，不能是1234这样，超出时会自动向下取整
-   * @param {boolean} [options.debug] - 调试模式
-   * @param {string} [options.format] -
-   *   日期时间格式化字符串，支持使用字母占位符匹配对应的年月日时分秒：Y=年、M=月、D=日、h=时、m=分、s=秒、ms=毫秒，年和毫秒字母占位符可以使用1-4个，其他占位符可以使用1-2个，如果实际结果值长度大于占位符的长度，则显示值实际结果值，如果小于，则前置用0补足
-   * @param {string} [options.mode] - 计时模式类型，可选值请参考 {@link MODE_TYPE}
    */
   constructor(options) {
-    const ctor = this.constructor
-
     this.$options = {
-      ...ctor.options,
+      ...Timer.options,
       ...options
     }
 
     this._logger = new Logger({
-      name: 'timer',
+      name: this.$options.name,
       debug: this.$options.debug
     })
 
     if (!this.$options.timeStamp) {
-      this._logger.error('require timeStamp option param, please check!')
+      return this._logger.error('require timeStamp option param, please check!')
     }
 
     this.$status = 'prepare'
@@ -172,6 +142,7 @@ class Timer {
    * 日志打印器，方便调试
    *
    * @since 1.0.0
+   *
    * @private
    */
   _logger = undefined
@@ -180,6 +151,7 @@ class Timer {
    * 日期时间格式化实例
    *
    * @since 1.0.0
+   *
    * @private
    */
   _formatDate = undefined
@@ -188,15 +160,19 @@ class Timer {
    * 延迟计时器ID
    *
    * @since 1.0.0
-   * @readonly
+   *
+   * @private
    */
   _timeouter = undefined
 
   /**
-   * 实例配置项
+   * 实例初始配置项
    *
    * @since 1.0.0
+   *
    * @readonly
+   *
+   * @type {object}
    */
   $options = undefined
 
@@ -204,7 +180,10 @@ class Timer {
    * 实例状态，可能处于以下状态：prepare=准备创段、processing=进行中、finished=已完成、stoped=暂停中
    *
    * @since 1.0.0
+   *
    * @readonly
+   *
+   * @type {string}
    */
   $status = undefined
 
@@ -212,21 +191,30 @@ class Timer {
    * 当前地区的偏移时区时间戳
    *
    * @since 1.0.0
+   *
    * @readonly
+   *
+   * @type {number}
    */
   $timeZoneTimeStamp = new Date().getTimezoneOffset() * 1000 * 60
   /**
    * 剩余计时时间戳
    *
    * @since 1.0.0
+   *
    * @readonly
+   *
+   * @type {number}
    */
   $remainTimeStamp = undefined
   /**
    * 已经过的时间戳
    *
    * @since 1.0.0
+   *
    * @readonly
+   *
+   * @type {number}
    */
   $throughTimeStamp = undefined
 
@@ -234,7 +222,10 @@ class Timer {
    * 开始计时时间戳
    *
    * @since 1.0.0
+   *
    * @readonly
+   *
+   * @type {number}
    */
   $startTimeStamp = undefined
 
@@ -242,7 +233,10 @@ class Timer {
    * 暂停计时时间戳
    *
    * @since 1.0.0
+   *
    * @readonly
+   *
+   * @type {number}
    */
   $stopTimeStamp = undefined
 
@@ -250,14 +244,20 @@ class Timer {
    * 计时器开始计时起 => 计时器完成时的一轮周期计时时间戳
    *
    * @since 1.0.0
+   *
    * @readonly
+   *
+   * @type {number}
    */
   $endTimeStamp = undefined
   /**
    * 当前时间的时间戳，用于修正计时器在空间维度中出现异常流逝的时间戳
    *
    * @since 1.0.0
+   *
    * @readonly
+   *
+   * @type {number}
    */
   $currentTimeStamp = undefined
 
@@ -265,28 +265,22 @@ class Timer {
    * 计时器每次记录的妙表功能
    *
    * @since 1.0.0
+   *
    * @readonly
+   *
+   * @type {string[]}
    */
   $stopwatch = []
-
-  /**
-   * 获取实例的调试配置项
-   *
-   * @since 1.0.0
-   * @getter
-   * @returns {string}
-   */
-  get $debug() {
-    return this._logger.$debug
-  }
 
   /**
    * 获取实例的计时时间戳配置项
    *
    * @since 1.0.0
+   *
    * @getter
    * @readonly
-   * @returns {string}
+   *
+   * @type {number}
    */
   get $timeStamp() {
     return this.$options.timeStamp
@@ -296,9 +290,11 @@ class Timer {
    * 获取实例的日期时间格式化配置项
    *
    * @since 1.0.0
+   *
    * @getter
    * @readonly
-   * @returns {string}
+   *
+   * @type {string}
    */
   get $format() {
     return this.$options.format
@@ -308,9 +304,11 @@ class Timer {
    * 获取实例的计时模式配置项
    *
    * @since 1.0.0
+   *
    * @getter
    * @readonly
-   * @returns {string}
+   *
+   * @type {string}
    */
   get $mode() {
     return MODE_TYPE[this.$options.mode]
@@ -320,9 +318,11 @@ class Timer {
    * 获取实例的日期时间字符串值
    *
    * @since 1.0.0
+   *
    * @getter
    * @readonly
-   * @returns {string}
+   *
+   * @type {string}
    */
   get $datetime() {
     return this._formatDate.toString()
@@ -332,8 +332,11 @@ class Timer {
    * 获取实例的日期时间数据片断
    *
    * @since 1.1.0
+   *
    * @getter
    * @readonly
+   *
+   * @type {object}
    * @property {string} [year] - 剩余年数
    * @property {string} [month] - 剩余月数
    * @property {string} [date] - 剩余日数
@@ -352,7 +355,11 @@ class Timer {
    * 若在未结束前中途造成暂停，会触发rejectd状态
    *
    * @since 1.0.0
+   *
+   * @async
+   *
    * @param {function} callback - 每秒执行的回调函数
+   *
    * @returns {Promise}
    */
   start(callback) {
@@ -390,7 +397,7 @@ class Timer {
         }
 
         // 计时时间已到达
-        if (this.$remainTimeStamp &lt; 0) {
+        if (this.$remainTimeStamp < 0) {
           this.$remainTimeStamp = 0
           this.$throughTimeStamp = this.$endTimeStamp - this.$startTimeStamp
         }
@@ -398,12 +405,10 @@ class Timer {
         this._formatDate = _actions.formatDate(this)
 
         // 优先执行回调
-        if (validation.isFunction(callback)) {
-          callback.call(this)
-        }
+        validation.isFunction(callback) && callback.call(this)
 
         /* eslint-enable max-len*/
-        if (this._timeouter &amp;&amp; this.$currentTimeStamp >= this.$endTimeStamp) {
+        if (this._timeouter && this.$currentTimeStamp >= this.$endTimeStamp) {
           clearTimeout(this._timeouter)
           this._timeouter = undefined
 
@@ -426,6 +431,7 @@ class Timer {
    * 秒表：记录触发该操作的计时结果，保存结果的值将根据当前实例的format格式化
    *
    * @since 1.1.0
+   *
    * @returns {Timer}
    */
   record() {
@@ -437,6 +443,7 @@ class Timer {
    * 计时器停止
    *
    * @since 1.0.0
+   *
    * @returns {Timer}
    */
   stop() {
@@ -453,6 +460,7 @@ class Timer {
    * 计时器复位
    *
    * @since 1.0.0
+   *
    * @returns {Timer}
    */
   reset() {
@@ -478,22 +486,4 @@ class Timer {
   }
 }
 
-export default Timer</code></pre>
-        </article>
-    </section>
-
-
-
-
-</div>
-
-<br class="clear">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Nov 09 2017 11:26:12 GMT+0800 (CST) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
-</footer>
-
-<script>prettyPrint();</script>
-<script src="scripts/linenumber.js"></script>
-</body>
-</html>
+export default Timer

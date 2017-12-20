@@ -5,7 +5,9 @@
  *
  * @global
  * @readonly
+ *
  * @constant {object} MODE_TYPE
+ *
  * @property {string} +='+' - 正序计时模式可选值
  * @property {string} inc='+' - 正序计时模式可选值
  * @property {string} increse='+' - 正序计时模式可选值
