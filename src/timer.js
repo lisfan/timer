@@ -91,12 +91,13 @@ class Timer {
    * @returns {Timer}
    */
   static config(options) {
-    Timer.options = {
-      ...Timer.options,
+    const ctr = this
+    ctr.options = {
+      ...ctr.options,
       ...options
     }
 
-    return this
+    return ctr
   }
 
   /**
@@ -108,8 +109,9 @@ class Timer {
    * @param {number} options.timeStamp - 剩余计时时间戳，毫秒单位，且毫秒数必须为1000单位，不能是1234这样，超出时会自动向下取整
    */
   constructor(options) {
+    const ctr = this.constructor
     this.$options = {
-      ...Timer.options,
+      ...ctr.options,
       ...options
     }
 

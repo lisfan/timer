@@ -54,8 +54,9 @@ class FormatDate {
    * @param {object} options - 其他配置选项见{@link FormatDate.options}
    */
   constructor(options) {
+    const ctr = this.constructor
     this.$options = {
-      ...FormatDate.options,
+      ...ctr.options,
       ...options
     }
 
@@ -75,7 +76,7 @@ class FormatDate {
    *
    * @returns {object}
    */
-  static getFields(date, format = FormatDate.options.format) {
+  static getFields(date, format = this.constructor.options.format) {
     if (!validation.isNumber(date) && !validation.isString(date) && !validation.isDate(date)) {
       return this._logger.error('require date option param, please check')
     }
