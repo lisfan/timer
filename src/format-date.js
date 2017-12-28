@@ -54,9 +54,9 @@ class FormatDate {
    * @param {object} options - 其他配置选项见{@link FormatDate.options}
    */
   constructor(options) {
-    const ctr = this.constructor
+    const ctor = this.constructor
     this.$options = {
-      ...ctr.options,
+      ...ctor.options,
       ...options
     }
 
